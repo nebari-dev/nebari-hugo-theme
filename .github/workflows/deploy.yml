@@ -37,6 +37,8 @@ jobs:
       - id: pages
         if: github.event_name != 'pull_request'
         uses: actions/configure-pages@v6
+        with:
+          enablement: true  # auto-provision Pages so a fresh repo/fork doesn't 404 on first deploy
 
       - name: Build
         run: |

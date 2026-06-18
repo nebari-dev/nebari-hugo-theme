@@ -6,7 +6,7 @@
       {{ i18n "notFoundBody" | default "The page you are looking for does not exist. Try searching, or head back to the docs home." }}
     </p>
     <p class="not-found__actions">
-      <a class="not-found__btn" href="{{ "/" | relURL }}">{{ i18n "backHome" | default "← Back to home" }}</a>
+      <a class="not-found__btn" href="{{ site.Home.RelPermalink }}">{{ i18n "backHome" | default "← Back to home" }}</a>
       {{- with site.Params.repo }}
         <a class="not-found__btn not-found__btn--ghost" href="{{ . }}/issues">{{ i18n "reportIssue" | default "Report an issue" }}</a>
       {{- end }}

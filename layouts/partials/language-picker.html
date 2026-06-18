@@ -24,7 +24,7 @@
             {{- end -}}
           {{- end -}}
         {{- end -}}
-        {{- if not $href -}}{{- $href = printf "/%s/" $lang.Lang | relURL -}}{{- end -}}
+        {{- if not $href -}}{{- $href = printf "%s/" $lang.Lang | relURL -}}{{- end -}}
         <li><a href="{{ $href }}"{{ if eq $lang.Lang site.Language.Lang }} aria-current="true"{{ end }}>{{ $lang.LanguageName | default $lang.Lang }}</a></li>
       {{- end }}
     </ul>

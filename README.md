@@ -39,9 +39,13 @@
   <a href="#local-preview">Local preview</a> &middot;
   <a href="#whats-shipped">What's shipped</a> &middot;
   <a href="#architecture">Architecture</a> &middot;
-  <a href="#development">Development</a>
+  <a href="#development">Development</a> &middot;
+  <a href="https://nebari-dev.github.io/nebari-hugo-theme/"><strong>Live demo</strong></a>
 </p>
 
+> **Live demo**: [nebari-dev.github.io/nebari-hugo-theme](https://nebari-dev.github.io/nebari-hugo-theme/) —
+> the `exampleSite/` in this repo, built and deployed to GitHub Pages on every push to `main`.
+>
 > **Status**: Early. Used by [`nebari-provenance-collector-pack`](https://github.com/nebari-dev/nebari-provenance-collector-pack)
 > as the first consumer / shakedown site. Expect breaking changes until v0.1.
 
