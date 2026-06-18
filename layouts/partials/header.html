@@ -1,5 +1,12 @@
 <header class="site-header">
   <div class="site-header__inner">
+    <button type="button" id="nav-toggle" class="icon-btn nav-toggle" aria-label="{{ i18n "menu" | default "Menu" }}" aria-expanded="false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <line x1="3" y1="6" x2="21" y2="6"></line>
+        <line x1="3" y1="12" x2="21" y2="12"></line>
+        <line x1="3" y1="18" x2="21" y2="18"></line>
+      </svg>
+    </button>
     <a class="site-header__brand" href="{{ "/" | relURL }}">
       <img class="site-logo--light" src="{{ site.Params.logo | default "/logo/logo.svg" | relURL }}" alt="Nebari">
       <img class="site-logo--dark" src="{{ site.Params.logoDark | default "/logo/logo-dark.svg" | relURL }}" alt="Nebari">
