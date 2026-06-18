@@ -1,6 +1,9 @@
 // Scroll-spy for the right-hand table of contents. Uses IntersectionObserver
 // to add/remove .is-active on the matching anchor as heading sections enter
-// the viewport. Only runs when #TableOfContents is present in the DOM.
+// the viewport. Robust to both scroll directions: tracks a Set of currently-
+// intersecting headings and picks the topmost one; falls back to the last
+// heading above the viewport top when nothing is intersecting.
+// Only runs when #TableOfContents is present in the DOM.
 
 document.addEventListener('DOMContentLoaded', () => {
   const nav = document.getElementById('TableOfContents');
@@ -17,6 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
     .filter((el): el is HTMLElement => el !== null);
 
   let activeLink: HTMLAnchorElement | null = null;
+  const intersecting = new Set<HTMLElement>();
 
   function setActive(link: HTMLAnchorElement | null): void {
     if (activeLink === link) return;
@@ -25,16 +29,50 @@ document.addEventListener('DOMContentLoaded', () => {
     if (activeLink) activeLink.classList.add('is-active');
   }
 
+  function pickActive(): void {
+    if (intersecting.size > 0) {
+      // Among currently-intersecting headings, pick the one closest to the
+      // top of the viewport (smallest positive or least-negative boundingRect top).
+      let best: HTMLElement | null = null;
+      let bestTop = Infinity;
+      for (const el of intersecting) {
+        const top = el.getBoundingClientRect().top;
+        if (top < bestTop) {
+          bestTop = top;
+          best = el;
+        }
+      }
+      if (best) {
+        const idx = headings.indexOf(best);
+        setActive(idx !== -1 ? (links[idx] ?? null) : null);
+      }
+    } else {
+      // Nothing intersecting - find the last heading whose top is above the
+      // viewport top (i.e. the section we have scrolled past most recently).
+      let best: HTMLElement | null = null;
+      for (const el of headings) {
+        if (el.getBoundingClientRect().top <= 0) {
+          best = el;
+        }
+      }
+      if (best) {
+        const idx = headings.indexOf(best);
+        setActive(idx !== -1 ? (links[idx] ?? null) : null);
+      }
+    }
+  }
+
   const observer = new IntersectionObserver(
     (entries) => {
       for (const entry of entries) {
+        const el = entry.target as HTMLElement;
         if (entry.isIntersecting) {
-          const idx = headings.indexOf(entry.target as HTMLElement);
-          if (idx !== -1) {
-            setActive(links[idx] ?? null);
-          }
+          intersecting.add(el);
+        } else {
+          intersecting.delete(el);
         }
       }
+      pickActive();
     },
     { rootMargin: '0px 0px -70% 0px' },
   );

@@ -420,7 +420,13 @@ a:hover { text-decoration: underline; }
 
 /* ------- Main / prose ------- */
 
+/* Default: constrain prose to a comfortable reading width. On pages that
+ * carry the right-hand ToC (.page-with-toc), the grid already allocates the
+ * article column via 1fr, so we remove the hard cap and let the grid do the
+ * work; the article stays readable because the grid column is naturally ~40-48rem
+ * once the 14rem ToC column and 2rem gap are subtracted from the 80rem container. */
 .main { min-width: 0; padding: 2.5rem 0; max-width: 48rem; }
+.page-with-toc .main { max-width: none; }
 
 .main h1, .main h2, .main h3, .main h4, .main h5, .main h6 {
   font-family: 'Poppins', system-ui, sans-serif;
@@ -764,12 +770,22 @@ a:hover { text-decoration: underline; }
   font-weight: 500;
 }
 
-@media (max-width: 768px) {
+/* Hide the ToC below 1024px - not enough horizontal room for article + aside. */
+@media (max-width: 1024px) {
+  .toc {
+    display: none;
+  }
   .page-with-toc {
     grid-template-columns: 1fr;
   }
-  .toc {
-    display: none;
+}
+
+/* Below 768px the left sidebar also hides and the layout goes single-column
+ * (handled by the .layout rule above). The .page-with-toc override here is
+ * belt-and-suspenders but kept explicit for clarity. */
+@media (max-width: 768px) {
+  .page-with-toc {
+    grid-template-columns: 1fr;
   }
 }
 
