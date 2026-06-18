@@ -338,8 +338,10 @@ a:hover { text-decoration: underline; }
   /* Show the hamburger toggle */
   .nav-toggle { display: inline-flex; }
 
-  /* Off-canvas sidebar: slides in from the left, overrides desktop sticky */
-  .sidebar {
+  /* Off-canvas sidebar: slides in from the left. Selector is scoped to
+     `.layout > .sidebar` (specificity 0,2,0) so it wins over the base
+     `.sidebar { position: sticky }` rule defined later in source order. */
+  .layout > .sidebar {
     position: fixed;
     top: 3.5rem;
     left: 0;
@@ -354,16 +356,16 @@ a:hover { text-decoration: underline; }
     overflow-y: auto;
   }
 
-  .sidebar--open {
+  .layout > .sidebar--open {
     transform: translateX(0);
   }
 
   /* Constrain search input so it does not overflow at 375px */
   .search__input {
-    width: 8rem;
+    width: 7rem;
   }
   .search__input:focus {
-    width: 10rem;
+    width: 9rem;
   }
 
   /* Ensure the header inner doesn't overflow at 375px */
@@ -372,8 +374,14 @@ a:hover { text-decoration: underline; }
     gap: 0.625rem;
   }
 
-  /* Tabs wrap gracefully */
-  .site-header__tabs {
+  /* Drop secondary header chrome that doesn't fit a phone width:
+     section tabs, the version + language pickers, and the brand
+     wordmark (the logo mark stays). */
+  .site-header__tabs,
+  .version-picker,
+  .lang-picker,
+  .site-header__brand .sep,
+  .site-header__brand span {
     display: none;
   }
 }
@@ -793,10 +801,15 @@ a:hover { text-decoration: underline; }
 
 .page-with-toc {
   display: grid;
-  grid-template-columns: 1fr var(--toc-w, 14rem);
+  /* minmax(0, 1fr) (not bare 1fr) lets the content column shrink below its
+     min-content width, so a wide <pre> scrolls via overflow-x instead of
+     blowing the grid track past the viewport on narrow screens. */
+  grid-template-columns: minmax(0, 1fr) var(--toc-w, 14rem);
   gap: 2rem;
   align-items: start;
 }
+/* Allow the article to shrink so its overflow-x:auto descendants scroll. */
+.page-with-toc > article { min-width: 0; }
 
 .toc {
   position: sticky;
@@ -851,7 +864,7 @@ a:hover { text-decoration: underline; }
     display: none;
   }
   .page-with-toc {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 
@@ -860,7 +873,7 @@ a:hover { text-decoration: underline; }
  * belt-and-suspenders but kept explicit for clarity. */
 @media (max-width: 768px) {
   .page-with-toc {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 
