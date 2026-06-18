@@ -3,7 +3,7 @@
 <title>{{ if .IsHome }}{{ site.Title }}{{ else }}{{ printf "%s · %s" .Title site.Title }}{{ end }}</title>
 {{ with .Description | default site.Params.description }}<meta name="description" content="{{ . }}">{{ end }}
 
-<link rel="icon" href="https://raw.githubusercontent.com/nebari-dev/nebari-design/main/symbol/favicon.ico">
+<link rel="icon" href="{{ "/favicon.ico" | relURL }}">
 
 {{/* FOUC-prevention: resolve theme before first paint. Honors ?theme=
      (for headless screenshots), then localStorage, then prefers-color-scheme. */}}
