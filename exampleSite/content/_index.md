@@ -3,6 +3,11 @@ title = 'nebari-hugo-theme'
 description = "Run `hugo server` in this repo to preview the theme. Edit content/_index.md to play with prose, code blocks, and tables."
 +++
 
+{{< callout type="warning" title="Archived version (v0.1)" >}}
+You're viewing the **v0.1** snapshot, rebuilt from the `demo/v0.1` git tag.
+The latest docs are at **[v0.2](https://nebari-dev.github.io/nebari-hugo-theme/)**.
+{{< /callout >}}
+
 This is the demo content shipped with the theme so contributors can run
 `hugo server` from this repo and see what the theme looks like without
 having to set up a consuming site.

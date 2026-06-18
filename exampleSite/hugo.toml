@@ -57,12 +57,12 @@ defaultContentLanguageInSubdir = false
   # rebuilt from its git tag into a /vX.Y/ subpath at deploy time — see
   # content/versioning.md (rendered as the "Versioning" page) for the recipe.
   [[params.versions]]
-    label   = "v0.2 (latest)"
-    url     = "https://nebari-dev.github.io/nebari-hugo-theme/"
-    current = true
+    label = "v0.2 (latest)"
+    url   = "https://nebari-dev.github.io/nebari-hugo-theme/"
   [[params.versions]]
-    label = "v0.1"
-    url   = "https://nebari-dev.github.io/nebari-hugo-theme/v0.1/"
+    label   = "v0.1"
+    url     = "https://nebari-dev.github.io/nebari-hugo-theme/v0.1/"
+    current = true
 
   # Multi-tab top nav. Each tab's URL determines which pages "belong"
   # to it (RelPermalink prefix match).
