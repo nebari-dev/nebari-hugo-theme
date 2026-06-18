@@ -29,6 +29,9 @@ other = "← Volver al inicio"
 [reportIssue]
 other = "Reportar un problema"
 
+[sidebarToggle]
+other = "Alternar sección"
+
 [toggleDarkMode]
 other = "Cambiar modo oscuro"
 

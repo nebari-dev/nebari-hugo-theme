@@ -335,13 +335,48 @@ a:hover { text-decoration: underline; }
 
 .sidebar__section { margin-bottom: 1.5rem; }
 
+/* Collapsible group wrapper (replaces the old .sidebar__section div) */
+.sidebar__group {
+  margin-bottom: 1.5rem;
+  /* Remove <details> default border/padding in some browsers */
+  border: none;
+  padding: 0;
+}
+
 .sidebar__heading {
+  /* Keep <summary> looking identical to the old <h3> */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  list-style: none; /* Firefox */
   margin: 0 0 0.5rem;
   font-size: 0.7rem;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.06em;
   color: var(--muted-foreground);
+  cursor: pointer;
+  user-select: none;
+}
+
+/* Remove the default disclosure triangle (WebKit) */
+.sidebar__heading::-webkit-details-marker { display: none; }
+
+/* Chevron via ::after, rotates to point down when open */
+.sidebar__heading::after {
+  content: '';
+  display: inline-block;
+  width: 0.55rem;
+  height: 0.55rem;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(-45deg); /* points right = collapsed */
+  transition: transform 0.2s;
+  flex-shrink: 0;
+}
+
+.sidebar__group[open] > .sidebar__heading::after {
+  transform: rotate(45deg); /* points down = expanded */
 }
 
 .sidebar__list { list-style: none; margin: 0; padding: 0; }

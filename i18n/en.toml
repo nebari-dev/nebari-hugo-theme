@@ -29,6 +29,9 @@ other = "← Back to home"
 [reportIssue]
 other = "Report an issue"
 
+[sidebarToggle]
+other = "Toggle section"
+
 [toggleDarkMode]
 other = "Toggle dark mode"
 
