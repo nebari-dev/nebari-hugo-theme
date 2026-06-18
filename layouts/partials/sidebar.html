@@ -11,6 +11,53 @@
 */}}
 <aside class="sidebar">
   <nav aria-label="Docs navigation">
+    {{/*
+      Mobile-only nav. Below 768px the header hides its tabs, version
+      picker, and language picker (see main.css), so without this block
+      those would be unreachable on a phone. We re-surface them inside the
+      off-canvas drawer. Hidden on desktop via `.sidebar__mobile-nav`.
+    */}}
+    <div class="sidebar__mobile-nav">
+      {{ with site.Params.tabs }}
+        <div class="sidebar__group sidebar__group--static">
+          <p class="sidebar__subhead">{{ i18n "sections" | default "Sections" }}</p>
+          <ul class="sidebar__list">
+            {{ range . }}
+              {{ $url := strings.TrimPrefix "/" .url | relLangURL }}
+              {{ $trimmed := strings.TrimRight "/" $url }}
+              {{ $here := strings.TrimRight "/" $.RelPermalink }}
+              {{ $active := or (eq $trimmed $here) (and (ne $trimmed "") (hasPrefix $here (printf "%s/" $trimmed))) }}
+              <li><a href="{{ $url }}" class="sidebar__link{{ if $active }} sidebar__link--active{{ end }}">{{ .name }}</a></li>
+            {{ end }}
+          </ul>
+        </div>
+      {{ end }}
+      {{ with site.Params.versions }}
+        <div class="sidebar__group sidebar__group--static">
+          <p class="sidebar__subhead">{{ i18n "version" | default "Version" }}</p>
+          <ul class="sidebar__list">
+            {{ range . }}
+              <li><a href="{{ .url }}" class="sidebar__link{{ if .current }} sidebar__link--active{{ end }}">{{ .label }}</a></li>
+            {{ end }}
+          </ul>
+        </div>
+      {{ end }}
+      {{ if gt (len site.Languages) 1 }}
+        <div class="sidebar__group sidebar__group--static">
+          <p class="sidebar__subhead">{{ i18n "language" | default "Language" }}</p>
+          <ul class="sidebar__list">
+            {{ range site.Languages }}
+              {{ $lang := . }}
+              {{ $href := "" }}
+              {{ with $.AllTranslations }}{{ range . }}{{ if eq .Language.Lang $lang.Lang }}{{ $href = .RelPermalink }}{{ end }}{{ end }}{{ end }}
+              {{ if not $href }}{{ $href = printf "%s/" $lang.Lang | relURL }}{{ end }}
+              <li><a href="{{ $href }}" class="sidebar__link{{ if eq $lang.Lang site.Language.Lang }} sidebar__link--active{{ end }}">{{ $lang.LanguageName | default $lang.Lang }}</a></li>
+            {{ end }}
+          </ul>
+        </div>
+      {{ end }}
+    </div>
+
     {{ range site.Params.sidebar }}
       {{ $key := .heading | urlize }}
       <details class="sidebar__group" open data-key="{{ $key }}">

@@ -1,0 +1,28 @@
+{{- /*
+  Table render hook. Wraps every Markdown table in a horizontally
+  scrollable container so wide tables scroll on narrow screens instead of
+  crushing their columns or overflowing the viewport. Styling lives in
+  main.css under `.table-wrap`.
+*/ -}}
+<div class="table-wrap">
+  <table>
+    <thead>
+      {{- range .THead }}
+      <tr>
+        {{- range . }}
+        <th{{ with .Alignment }} style="text-align: {{ . }}"{{ end }}>{{ .Text }}</th>
+        {{- end }}
+      </tr>
+      {{- end }}
+    </thead>
+    <tbody>
+      {{- range .TBody }}
+      <tr>
+        {{- range . }}
+        <td{{ with .Alignment }} style="text-align: {{ . }}"{{ end }}>{{ .Text }}</td>
+        {{- end }}
+      </tr>
+      {{- end }}
+    </tbody>
+  </table>
+</div>

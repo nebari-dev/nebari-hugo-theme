@@ -229,7 +229,9 @@ loop, not an out-of-band script.
 | Edit-on-GitHub link (`params.editBase`) | shipped | `layouts/partials/edit-link.html` |
 | Table of contents widget (right sidebar) with scroll-spy | shipped | `layouts/partials/toc.html`, `assets/js/toc.ts` |
 | Collapsible sidebar groups with persisted state | shipped | `layouts/partials/sidebar.html`, `assets/js/sidebar.ts` |
-| Responsive layout (off-canvas sidebar + hamburger under 768px) | shipped | `assets/css/main.css`, `assets/js/nav-toggle.ts` |
+| Responsive layout — off-canvas drawer under 768px that re-surfaces tabs + version + language pickers | shipped | `assets/css/main.css`, `assets/js/nav-toggle.ts`, `layouts/partials/sidebar.html` |
+| Horizontally scrollable tables on narrow screens | shipped | `layouts/_default/_markup/render-table.html`, `assets/css/main.css` |
+| Theme behaviour tests (responsive nav, table wrapping) | shipped | `scripts/test-theme.sh` |
 | Callout / admonition shortcode (note/tip/warning/caution) | shipped | `layouts/shortcodes/callout.html` |
 | GitHub Pages build + deploy workflow | shipped | `.github/workflows/deploy.yml` |
 | `prefers-reduced-motion` audit | not yet | — |
@@ -277,6 +279,7 @@ Quick loop:
 make dev                       # live preview
 # … edit assets/, layouts/, content in exampleSite/content/ …
 make screenshots               # regenerate README images when chrome changes
+make test                      # run theme behaviour tests (also runs in CI)
 make check-readme              # verify README still matches the repo (also runs in CI)
 git commit -am "feat: …"
 ```
