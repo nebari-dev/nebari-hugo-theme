@@ -8,8 +8,9 @@ EXAMPLE     := exampleSite
 SHOTS       := docs/screenshots
 CHROME      ?= google-chrome
 WINDOW_SIZE ?= 1440,1200
+MOBILE_SIZE ?= 390,1500
 
-.PHONY: help dev build preview clean screenshots tidy
+.PHONY: help dev build preview clean screenshots tidy check-tokens
 
 help: ## Print this help.
 	@awk 'BEGIN {FS = ":.*?## "} /^[a-zA-Z_-]+:.*?## / {printf "  \033[36m%-12s\033[0m %s\n", $$1, $$2}' $(MAKEFILE_LIST)
@@ -43,12 +44,40 @@ screenshots: ## Capture light + dark hero screenshots into $(SHOTS)/
 	  --virtual-time-budget=5000 --window-size=$(WINDOW_SIZE) \
 	  --screenshot=$(SHOTS)/components-dark.png \
 	  'http://127.0.0.1:$(PORT)/components/?theme=dark' 2>&1 | tail -1
+	@$(CHROME) --headless --no-sandbox --disable-gpu --hide-scrollbars \
+	  --virtual-time-budget=5000 --window-size=$(WINDOW_SIZE) \
+	  --screenshot=$(SHOTS)/docs-light.png \
+	  'http://127.0.0.1:$(PORT)/architecture/?theme=light' 2>&1 | tail -1
+	@$(CHROME) --headless --no-sandbox --disable-gpu --hide-scrollbars \
+	  --virtual-time-budget=5000 --window-size=$(WINDOW_SIZE) \
+	  --screenshot=$(SHOTS)/docs-dark.png \
+	  'http://127.0.0.1:$(PORT)/architecture/?theme=dark' 2>&1 | tail -1
+	@$(CHROME) --headless --no-sandbox --disable-gpu --hide-scrollbars \
+	  --virtual-time-budget=5000 --window-size=$(MOBILE_SIZE) \
+	  --screenshot=$(SHOTS)/mobile-light.png \
+	  'http://127.0.0.1:$(PORT)/architecture/?theme=light' 2>&1 | tail -1
 	@kill $$(cat /tmp/nht-hugo.pid) 2>/dev/null || true
 	@rm -f /tmp/nht-hugo.pid
 	@ls -la $(SHOTS)/*.png
 
 tidy: ## Refresh exampleSite Hugo Modules (rare; needed after editing imports)
 	cd $(EXAMPLE) && $(HUGO) mod tidy
+
+check-tokens: ## Diff vendored tokens against upstream nebari-design globals.css (best-effort)
+	@echo "Fetching upstream nebari-design globals.css..."
+	@UPSTREAM=$$(curl -fsSL \
+	  "https://raw.githubusercontent.com/nebari-dev/nebari-design/main/globals.css" \
+	  2>/dev/null) || { echo "WARNING: could not fetch upstream globals.css (offline?)"; exit 0; }; \
+	VENDORED=$$(awk '/:root|\.dark/{found=1} found{print} /^}$$/{if(found)found=0}' \
+	  assets/css/main.css); \
+	UPSTREAM_TOKENS=$$(echo "$$UPSTREAM" | awk '/:root|\.dark/{found=1} found{print} /^}$$/{if(found)found=0}'); \
+	DIFF=$$(diff <(echo "$$UPSTREAM_TOKENS") <(echo "$$VENDORED") 2>/dev/null); \
+	if [ -z "$$DIFF" ]; then \
+	  echo "Tokens: in sync with upstream."; \
+	else \
+	  echo "Tokens: DRIFT DETECTED - diff (upstream vs vendored):"; \
+	  echo "$$DIFF"; \
+	fi
 
 clean: ## Remove build artifacts
 	rm -rf $(EXAMPLE)/public $(EXAMPLE)/resources $(EXAMPLE)/.hugo_build.lock

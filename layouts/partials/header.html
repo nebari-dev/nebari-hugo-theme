@@ -1,7 +1,15 @@
 <header class="site-header">
   <div class="site-header__inner">
+    <button type="button" id="nav-toggle" class="icon-btn nav-toggle" aria-label="{{ i18n "menu" | default "Menu" }}" aria-expanded="false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <line x1="3" y1="6" x2="21" y2="6"></line>
+        <line x1="3" y1="12" x2="21" y2="12"></line>
+        <line x1="3" y1="18" x2="21" y2="18"></line>
+      </svg>
+    </button>
     <a class="site-header__brand" href="{{ "/" | relURL }}">
-      <img src="{{ site.Params.logo | default "https://raw.githubusercontent.com/nebari-dev/nebari-design/main/logo-mark/horizontal/standard/Nebari-Logo-Horizontal-Lockup.png" }}" alt="Nebari">
+      <img class="site-logo--light" src="{{ site.Params.logo | default "/logo/logo.svg" | relURL }}" alt="Nebari">
+      <img class="site-logo--dark" src="{{ site.Params.logoDark | default "/logo/logo-dark.svg" | relURL }}" alt="Nebari">
       {{ with site.Title }}
         <span class="sep">/</span>
         <span>{{ . }}</span>
@@ -86,4 +94,7 @@
   .theme-icon--moon { display: none; }
   .dark .theme-icon--sun { display: none; }
   .dark .theme-icon--moon { display: inline; }
+  .site-logo--dark { display: none; }
+  .dark .site-logo--light { display: none; }
+  .dark .site-logo--dark { display: inline; }
 </style>

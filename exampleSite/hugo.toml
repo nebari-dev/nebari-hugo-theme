@@ -34,6 +34,9 @@ defaultContentLanguageInSubdir = false
     guessSyntax = true
   [markup.goldmark.renderer]
     unsafe = true
+  [markup.tableOfContents]
+    startLevel = 2
+    endLevel   = 3
 
 # Required for client-side Fuse.js search — the home page must emit
 # /index.json so search.ts can fetch and index it.
@@ -43,6 +46,7 @@ defaultContentLanguageInSubdir = false
 [params]
   description = "Minimal Hugo theme for Nebari software-pack docs."
   repo        = "https://github.com/nebari-dev/nebari-hugo-theme"
+  editBase    = "https://github.com/nebari-dev/nebari-hugo-theme/edit/main/exampleSite/content"
 
   # Versioning: rendered as a dropdown next to the search box. The
   # `current = true` entry is what's shown on the trigger.
@@ -66,26 +70,35 @@ defaultContentLanguageInSubdir = false
   # Sidebar tree. Items are either {label, url} (real page) or
   # {label, soon=true} (stub with "soon" badge).
   [[params.sidebar]]
-    heading = "Demo pages"
+    heading = "Documentation"
     [[params.sidebar.items]]
-      label = "Home"
-      url   = "/"
+      label = "Quickstart"
+      url   = "/quickstart/"
     [[params.sidebar.items]]
-      label = "Components"
-      url   = "/components/"
+      label = "Installation"
+      url   = "/installation/"
+    [[params.sidebar.items]]
+      label = "Local Development"
+      url   = "/local-development/"
+    [[params.sidebar.items]]
+      label = "Shared Storage"
+      url   = "/shared-storage/"
 
   [[params.sidebar]]
-    heading = "Future"
+    heading = "Reference"
     [[params.sidebar.items]]
-      label = "Customization"
-      soon  = true
+      label = "Configuration"
+      url   = "/configuration/"
     [[params.sidebar.items]]
-      label = "Edit-on-GitHub"
-      soon  = true
+      label = "Architecture"
+      url   = "/architecture/"
+    [[params.sidebar.items]]
+      label = "CI/CD and Releasing"
+      url   = "/cicd-and-releasing/"
 
 [module]
   [module.hugoVersion]
-    extended = false
+    extended = true
     min      = "0.116.0"
   [[module.imports]]
     path = "github.com/nebari-dev/nebari-hugo-theme"

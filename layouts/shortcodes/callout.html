@@ -1,0 +1,6 @@
+{{- $type := .Get "type" | default "note" -}}
+{{- $title := .Get "title" | default (i18n (printf "callout_%s" $type) | default (title $type)) -}}
+<div class="callout callout--{{ $type }}">
+  <p class="callout__title">{{ $title }}</p>
+  <div class="callout__body">{{ .Inner | .Page.RenderString }}</div>
+</div>

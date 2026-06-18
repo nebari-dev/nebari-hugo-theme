@@ -56,3 +56,21 @@ flowchart LR
 
 > Quoted text picks up the primary purple bar on the left and a muted
 > background tint — useful for callouts in install runbooks.
+
+## Callouts
+
+{{< callout type="note" >}}
+Default note callout. Inline `code` and **bold** work inside.
+{{< /callout >}}
+
+{{< callout type="tip" title="Heads up" >}}
+This is a tip callout.
+{{< /callout >}}
+
+{{< callout type="warning" >}}
+Something might go wrong here. Check your configuration before proceeding.
+{{< /callout >}}
+
+{{< callout type="caution" >}}
+Irreversible action ahead. Make sure you have a backup.
+{{< /callout >}}

@@ -4,12 +4,17 @@
   where each item is either {label, url} (real page) or
   {label, soon=true} (stub). The active link is the one whose `url`
   matches the current page's RelPermalink.
+
+  Each section is wrapped in a <details> element so groups are
+  collapsible. JavaScript (sidebar.ts) persists each group's open/closed
+  state in localStorage keyed by "nbt-nav:<slug>".
 */}}
 <aside class="sidebar">
   <nav aria-label="Docs navigation">
     {{ range site.Params.sidebar }}
-      <div class="sidebar__section">
-        <h3 class="sidebar__heading">{{ .heading }}</h3>
+      {{ $key := .heading | urlize }}
+      <details class="sidebar__group" open data-key="{{ $key }}">
+        <summary class="sidebar__heading" aria-label="{{ i18n "sidebarToggle" }} {{ .heading }}">{{ .heading }}</summary>
         <ul class="sidebar__list">
           {{ range .items }}
             <li>
@@ -26,7 +31,7 @@
             </li>
           {{ end }}
         </ul>
-      </div>
+      </details>
     {{ end }}
   </nav>
 </aside>

@@ -1,0 +1,5 @@
+{{ with site.Params.editBase }}
+  {{ if $.File }}
+  <a class="edit-link" href="{{ . }}/{{ $.File.Path }}">{{ i18n "editPage" | default "Edit this page on GitHub" }}</a>
+  {{ end }}
+{{ end }}

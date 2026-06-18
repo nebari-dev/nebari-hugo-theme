@@ -29,6 +29,9 @@ other = "← Volver al inicio"
 [reportIssue]
 other = "Reportar un problema"
 
+[sidebarToggle]
+other = "Alternar sección"
+
 [toggleDarkMode]
 other = "Cambiar modo oscuro"
 
@@ -43,3 +46,24 @@ other = "Hecho con nebari-design"
 
 [builtBy]
 other = "Hecho por Nebari"
+
+[onThisPage]
+other = "En esta página"
+
+[menu]
+other = "Menú"
+
+[editPage]
+other = "Editar esta página en GitHub"
+
+[callout_note]
+other = "Nota"
+
+[callout_tip]
+other = "Consejo"
+
+[callout_warning]
+other = "Advertencia"
+
+[callout_caution]
+other = "Precaución"

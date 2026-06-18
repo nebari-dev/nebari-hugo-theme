@@ -26,9 +26,15 @@
     {{ $searchJS  := resources.Get "js/search.ts"        | js.Build $tsOpts | fingerprint }}
     {{ $copyJS    := resources.Get "js/copy.ts"          | js.Build $tsOpts | fingerprint }}
     {{ $mermaidJS := resources.Get "js/mermaid-init.ts"  | js.Build $tsOpts | fingerprint }}
+    {{ $sidebarJS := resources.Get "js/sidebar.ts"       | js.Build $tsOpts | fingerprint }}
+    {{ $tocJS     := resources.Get "js/toc.ts"           | js.Build $tsOpts | fingerprint }}
+    {{ $navToggleJS := resources.Get "js/nav-toggle.ts"  | js.Build $tsOpts | fingerprint }}
     <script type="module" src="{{ $themeJS.RelPermalink   }}" integrity="{{ $themeJS.Data.Integrity   }}"></script>
     <script type="module" src="{{ $copyJS.RelPermalink    }}" integrity="{{ $copyJS.Data.Integrity    }}"></script>
     <script type="module" src="{{ $mermaidJS.RelPermalink }}" integrity="{{ $mermaidJS.Data.Integrity }}"></script>
+    <script type="module" src="{{ $sidebarJS.RelPermalink }}" integrity="{{ $sidebarJS.Data.Integrity }}"></script>
+    <script type="module" src="{{ $tocJS.RelPermalink     }}" integrity="{{ $tocJS.Data.Integrity     }}"></script>
+    <script type="module" src="{{ $navToggleJS.RelPermalink }}" integrity="{{ $navToggleJS.Data.Integrity }}"></script>
     {{ if not (eq site.Params.search false) }}
       <script type="module" src="{{ $searchJS.RelPermalink }}" integrity="{{ $searchJS.Data.Integrity }}"></script>
     {{ end }}

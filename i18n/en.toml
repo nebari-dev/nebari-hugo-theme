@@ -29,6 +29,9 @@ other = "← Back to home"
 [reportIssue]
 other = "Report an issue"
 
+[sidebarToggle]
+other = "Toggle section"
+
 [toggleDarkMode]
 other = "Toggle dark mode"
 
@@ -43,3 +46,24 @@ other = "Powered by nebari-design"
 
 [builtBy]
 other = "Built by Nebari"
+
+[onThisPage]
+other = "On this page"
+
+[menu]
+other = "Menu"
+
+[editPage]
+other = "Edit this page on GitHub"
+
+[callout_note]
+other = "Note"
+
+[callout_tip]
+other = "Tip"
+
+[callout_warning]
+other = "Warning"
+
+[callout_caution]
+other = "Caution"

@@ -1,0 +1,6 @@
+{{ if and (not (eq .Params.toc false)) (gt (len .TableOfContents) 100) }}
+<aside class="toc" aria-label="{{ i18n "onThisPage" | default "On this page" }}">
+  <p class="toc__title">{{ i18n "onThisPage" | default "On this page" }}</p>
+  {{ .TableOfContents }}
+</aside>
+{{ end }}
