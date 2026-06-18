@@ -49,8 +49,8 @@
 
 A small Hugo theme module that does **two things**:
 
-1. **Imports the design tokens** from `@nebari/theme` so pack docs render with the same OKLCH palette, Inter +
-   Fira Code typography, and primary purple as the rest of the Nebari ecosystem (the design library itself,
+1. **Imports the design tokens** from `@nebari/theme` so pack docs render with the same OKLCH palette, Poppins +
+   Atkinson Hyperlegible typography (Fira Code for code), and primary purple as the rest of the Nebari ecosystem (the design library itself,
    `nebari-landing`, dashboards, future pack consumers).
 2. **Owns the docs chrome** — header + sticky top nav with tabs + client-side search + sidebar tree with
    section grouping + dark-mode toggle + content / footer — so a consuming pack's repo only needs `content/*.md`
@@ -58,14 +58,24 @@ A small Hugo theme module that does **two things**:
 
 Scope is intentionally narrow vs general-purpose Hugo doc themes (Doks, Hextra, Geekdoc): no in-browser LLM
 assistant, no megamenu, no blog mode. Visual identity comes from `@nebari/theme` directly so packs inherit the
-same OKLCH palette, Inter + Fira Code typography, and primary purple as the rest of the Nebari ecosystem (apps,
+same OKLCH palette, Poppins + Atkinson Hyperlegible typography, and primary purple as the rest of the Nebari ecosystem (apps,
 dashboards, the design system itself).
 
 | | Light | Dark |
 | :---: | :---: | :---: |
+| Docs page | ![Docs page — light](docs/screenshots/docs-light.png) | ![Docs page — dark](docs/screenshots/docs-dark.png) |
 | Home  | ![Home — light](docs/screenshots/hero-light.png) | ![Home — dark](docs/screenshots/hero-dark.png) |
 | Inner | ![Components page — light](docs/screenshots/components-light.png) | ![Components page — dark](docs/screenshots/components-dark.png) |
 | 404   | ![404 — light](docs/screenshots/404-light.png) | ![404 — dark](docs/screenshots/404-dark.png) |
+
+A documentation page shows the grouped sidebar (collapsible **Documentation** / **Reference**
+sections), the right-hand "On this page" table of contents with scroll-spy, breadcrumbs, and an
+Edit-on-GitHub link. The layout is responsive — below 768px the sidebar collapses behind a
+hamburger toggle:
+
+<p align="center">
+  <img src="docs/screenshots/mobile-light.png" alt="Responsive mobile layout — header collapses to a hamburger toggle, content reflows with no horizontal overflow" width="300">
+</p>
 
 ## Use in a pack
 
@@ -187,10 +197,14 @@ loop, not an out-of-band script.
 | Versioning (`[[params.versions]]` dropdown) | shipped | `layouts/partials/version-picker.html` |
 | Themed 404 page with home / report-issue actions | shipped | `layouts/404.html` |
 | Catppuccin Mocha code highlighting (Chroma) | shipped | `assets/css/main.css` |
-| Fira Code in code blocks, Inter in body | shipped | `assets/css/main.css` |
+| Self-hosted Poppins (headings) + Atkinson Hyperlegible (body) + Fira Code (code) | shipped | `assets/css/main.css`, `static/fonts/` |
 | `@nebari/theme` OKLCH token import | shipped | `assets/css/main.css` |
 | Edit-on-GitHub link (`params.editBase`) | shipped | `layouts/partials/edit-link.html` |
-| Table of contents widget (right sidebar) | not yet | — |
+| Table of contents widget (right sidebar) with scroll-spy | shipped | `layouts/partials/toc.html`, `assets/js/toc.ts` |
+| Collapsible sidebar groups with persisted state | shipped | `layouts/partials/sidebar.html`, `assets/js/sidebar.ts` |
+| Responsive layout (off-canvas sidebar + hamburger under 768px) | shipped | `assets/css/main.css`, `assets/js/nav-toggle.ts` |
+| Callout / admonition shortcode (note/tip/warning/caution) | shipped | `layouts/shortcodes/callout.html` |
+| GitHub Pages build + deploy workflow | shipped | `.github/workflows/deploy.yml` |
 | `prefers-reduced-motion` audit | not yet | — |
 
 ## Architecture
