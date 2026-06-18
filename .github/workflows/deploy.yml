@@ -12,7 +12,7 @@ permissions:
 
 concurrency:
   group: pages
-  cancel-in-progress: true
+  cancel-in-progress: false  # don't cancel an in-flight Pages deploy
 
 jobs:
   build:
@@ -38,7 +38,7 @@ jobs:
       - name: Build
         run: |
           cd exampleSite && hugo --gc --minify \
-            --baseURL "${{ steps.pages.outputs.base_url || 'https://nebari-dev.github.io/nebari-hugo-theme/' }}/"
+            --baseURL "${{ steps.pages.outputs.base_url || 'https://nebari-dev.github.io/nebari-hugo-theme/' }}"
 
       - name: Upload artifact
         if: github.event_name != 'pull_request'
