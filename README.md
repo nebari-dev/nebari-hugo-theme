@@ -204,7 +204,10 @@ directive in `exampleSite/go.mod`, so every theme change shows up without re-pub
 | `make clean` | Remove `public/`, `resources/`, and other Hugo build artifacts |
 
 The screenshots embedded above are captured exactly this way — `make screenshots` is part of the contributor
-loop, not an out-of-band script.
+loop, not an out-of-band script. They are also regenerated automatically: after a merge to `main` that touches
+the rendered output (`assets/`, `layouts/`, `exampleSite/`, ...), the `Auto-update generated assets` workflow
+reruns `make screenshots` and commits any changes back as `github-actions[bot]` with a `[skip ci]` message, so
+you don't have to remember to refresh them by hand.
 
 ## What's shipped
 
