@@ -14,7 +14,7 @@
   {{- end -}}
   <nav class="breadcrumbs" aria-label="Breadcrumb">
     <ol>
-      <li><a href="{{ "/" | relURL }}">{{ i18n "home" | default "Home" }}</a></li>
+      <li><a href="{{ site.Home.RelPermalink }}">{{ i18n "home" | default "Home" }}</a></li>
       {{- range $crumb := (collections.Reverse $crumbs) }}
         <li>
           {{- if $crumb.isCurrent -}}

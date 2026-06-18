@@ -19,7 +19,7 @@
           {{ range .items }}
             <li>
               {{ if .url }}
-                {{ $href := .url | relURL }}
+                {{ $href := strings.TrimPrefix "/" .url | relLangURL }}
                 {{ $active := eq (strings.TrimRight "/" $href) (strings.TrimRight "/" $.RelPermalink) }}
                 <a href="{{ $href }}" class="sidebar__link{{ if $active }} sidebar__link--active{{ end }}">{{ .label }}</a>
               {{ else }}

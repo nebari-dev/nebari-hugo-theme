@@ -25,7 +25,7 @@
     <ul role="menu">
       {{- range . }}
         <li>
-          <a href="{{ .url | relURL }}"{{ if .current }} aria-current="true"{{ end }}>{{ .label }}</a>
+          <a href="{{ strings.TrimPrefix "/" .url | relLangURL }}"{{ if .current }} aria-current="true"{{ end }}>{{ .label }}</a>
         </li>
       {{- end }}
     </ul>

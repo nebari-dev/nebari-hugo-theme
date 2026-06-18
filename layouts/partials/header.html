@@ -7,9 +7,9 @@
         <line x1="3" y1="18" x2="21" y2="18"></line>
       </svg>
     </button>
-    <a class="site-header__brand" href="{{ "/" | relURL }}">
-      <img class="site-logo--light" src="{{ site.Params.logo | default "/logo/logo.svg" | relURL }}" alt="Nebari">
-      <img class="site-logo--dark" src="{{ site.Params.logoDark | default "/logo/logo-dark.svg" | relURL }}" alt="Nebari">
+    <a class="site-header__brand" href="{{ site.Home.RelPermalink }}">
+      <img class="site-logo--light" src="{{ strings.TrimPrefix "/" (site.Params.logo | default "logo/logo.svg") | relURL }}" alt="Nebari">
+      <img class="site-logo--dark" src="{{ strings.TrimPrefix "/" (site.Params.logoDark | default "logo/logo-dark.svg") | relURL }}" alt="Nebari">
       {{ with site.Title }}
         <span class="sep">/</span>
         <span>{{ . }}</span>
@@ -25,7 +25,7 @@
     {{ with site.Params.tabs }}
       <nav class="site-header__tabs" aria-label="Sections">
         {{ range . }}
-          {{ $url := .url | relURL }}
+          {{ $url := strings.TrimPrefix "/" .url | relLangURL }}
           {{ $trimmed := strings.TrimRight "/" $url }}
           {{ $here := strings.TrimRight "/" $.RelPermalink }}
           {{ $active := or (eq $trimmed $here) (and (ne $trimmed "") (hasPrefix $here (printf "%s/" $trimmed))) }}
@@ -60,7 +60,7 @@
               autocomplete="off"
               placeholder="{{ i18n "search" | default "Search docs" }}"
               class="search__input"
-              data-index-url="{{ "/index.json" | relURL }}">
+              data-index-url="{{ "index.json" | relLangURL }}">
           </label>
           <div class="search__drawer" id="search-drawer" hidden>
             <ul class="search__list" id="search-results"></ul>
