@@ -70,22 +70,31 @@ defaultContentLanguageInSubdir = false
   # Sidebar tree. Items are either {label, url} (real page) or
   # {label, soon=true} (stub with "soon" badge).
   [[params.sidebar]]
-    heading = "Demo pages"
+    heading = "Documentation"
     [[params.sidebar.items]]
-      label = "Home"
-      url   = "/"
+      label = "Quickstart"
+      url   = "/quickstart/"
     [[params.sidebar.items]]
-      label = "Components"
-      url   = "/components/"
+      label = "Installation"
+      url   = "/installation/"
+    [[params.sidebar.items]]
+      label = "Local Development"
+      url   = "/local-development/"
+    [[params.sidebar.items]]
+      label = "Shared Storage"
+      url   = "/shared-storage/"
 
   [[params.sidebar]]
-    heading = "Future"
+    heading = "Reference"
     [[params.sidebar.items]]
-      label = "Customization"
-      soon  = true
+      label = "Configuration"
+      url   = "/configuration/"
     [[params.sidebar.items]]
-      label = "Edit-on-GitHub"
-      soon  = true
+      label = "Architecture"
+      url   = "/architecture/"
+    [[params.sidebar.items]]
+      label = "CI/CD and Releasing"
+      url   = "/cicd-and-releasing/"
 
 [module]
   [module.hugoVersion]
