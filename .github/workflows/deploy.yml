@@ -40,10 +40,30 @@ jobs:
         with:
           enablement: true  # auto-provision Pages so a fresh repo/fork doesn't 404 on first deploy
 
-      - name: Build
+      # Shared site root (no trailing slash). On PRs the `pages` step is
+      # skipped, so fall back to the known Pages URL.
+      - name: Resolve base URL
+        run: echo "BASE=${{ steps.pages.outputs.base_url || 'https://nebari-dev.github.io/nebari-hugo-theme' }}" >> "$GITHUB_ENV"
+
+      # Current docs (latest) → site root.
+      - name: Build current docs
+        run: cd exampleSite && hugo --gc --minify --baseURL "$BASE/"
+
+      # Versioned docs: rebuild each released tag into /vX.Y/ — no copy of
+      # the docs lives in the repo, only the tag. See content/versioning.md.
+      # Add a checkout+build pair per version you keep online.
+      - name: Check out v0.1 docs (tag)
+        uses: actions/checkout@v7
+        with:
+          ref: demo/v0.1
+          path: _versions/v0.1
+          fetch-depth: 0  # last-updated stamp needs history
+
+      - name: Build v0.1 docs into /v0.1/
         run: |
-          cd exampleSite && hugo --gc --minify \
-            --baseURL "${{ steps.pages.outputs.base_url || 'https://nebari-dev.github.io/nebari-hugo-theme/' }}"
+          cd _versions/v0.1/exampleSite && hugo --gc --minify \
+            --baseURL "$BASE/v0.1/" \
+            --destination "$GITHUB_WORKSPACE/exampleSite/public/v0.1"
 
       - name: Upload artifact
         if: github.event_name != 'pull_request'
