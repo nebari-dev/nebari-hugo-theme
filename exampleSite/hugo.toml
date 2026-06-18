@@ -11,6 +11,22 @@ languageCode = "en-US"
 title        = "nebari-hugo-theme demo"
 theme        = ["github.com/nebari-dev/nebari-hugo-theme"]
 
+# Pull last-commit date for each markdown file so the "Last updated"
+# stamp under page titles works.
+enableGitInfo = true
+
+defaultContentLanguage         = "en"
+defaultContentLanguageInSubdir = false
+
+[languages]
+  [languages.en]
+    languageName = "English"
+    weight       = 1
+  [languages.es]
+    languageName = "Español"
+    weight       = 2
+    title        = "demo de nebari-hugo-theme"
+
 [markup]
   [markup.highlight]
     noClasses   = false
@@ -27,6 +43,16 @@ theme        = ["github.com/nebari-dev/nebari-hugo-theme"]
 [params]
   description = "Minimal Hugo theme for Nebari software-pack docs."
   repo        = "https://github.com/nebari-dev/nebari-hugo-theme"
+
+  # Versioning: rendered as a dropdown next to the search box. The
+  # `current = true` entry is what's shown on the trigger.
+  [[params.versions]]
+    label   = "v0.2 (current)"
+    url     = "/"
+    current = true
+  [[params.versions]]
+    label = "v0.1"
+    url   = "https://example.org/v0.1/"
 
   # Multi-tab top nav. Each tab's URL determines which pages "belong"
   # to it (RelPermalink prefix match).

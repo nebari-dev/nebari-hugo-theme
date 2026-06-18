@@ -1,0 +1,45 @@
+# English translations. Consuming sites can add languages by setting
+# `defaultContentLanguage = "<code>"` and `[languages.<code>]` in their
+# hugo.toml, plus i18n/<code>.toml files mirroring this layout.
+
+[home]
+other = "Home"
+
+[search]
+other = "Search docs"
+
+[searchEmpty]
+other = "No matches."
+
+[searchUnavailable]
+other = "Search index unavailable."
+
+[lastUpdated]
+other = "Last updated"
+
+[notFoundTitle]
+other = "Page not found"
+
+[notFoundBody]
+other = "The page you are looking for does not exist. Try searching, or head back to the docs home."
+
+[backHome]
+other = "← Back to home"
+
+[reportIssue]
+other = "Report an issue"
+
+[toggleDarkMode]
+other = "Toggle dark mode"
+
+[githubRepo]
+other = "GitHub repository"
+
+[breadcrumbLabel]
+other = "Breadcrumb"
+
+[poweredBy]
+other = "Powered by nebari-design"
+
+[builtBy]
+other = "Built by Nebari"

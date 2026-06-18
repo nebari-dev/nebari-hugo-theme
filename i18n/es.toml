@@ -1,0 +1,45 @@
+# Spanish translations — included as a second-language sample so the
+# theme's i18n wiring has something to exercise. Real consumers add
+# their own i18n/<code>.toml files.
+
+[home]
+other = "Inicio"
+
+[search]
+other = "Buscar documentos"
+
+[searchEmpty]
+other = "Sin resultados."
+
+[searchUnavailable]
+other = "Índice de búsqueda no disponible."
+
+[lastUpdated]
+other = "Última actualización"
+
+[notFoundTitle]
+other = "Página no encontrada"
+
+[notFoundBody]
+other = "La página que buscas no existe. Prueba con la búsqueda o vuelve al inicio."
+
+[backHome]
+other = "← Volver al inicio"
+
+[reportIssue]
+other = "Reportar un problema"
+
+[toggleDarkMode]
+other = "Cambiar modo oscuro"
+
+[githubRepo]
+other = "Repositorio en GitHub"
+
+[breadcrumbLabel]
+other = "Ruta de navegación"
+
+[poweredBy]
+other = "Hecho con nebari-design"
+
+[builtBy]
+other = "Hecho por Nebari"

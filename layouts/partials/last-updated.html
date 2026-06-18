@@ -1,0 +1,14 @@
+{{/*
+  Render "Last updated <relative date>" under the page title. Only fires
+  when the consuming site sets `enableGitInfo = true` in its hugo.toml,
+  which populates .GitInfo and .Lastmod from the commit metadata.
+*/}}
+{{- with .GitInfo -}}
+  {{- $lastmod := $.Lastmod -}}
+  <p class="last-updated">
+    {{ i18n "lastUpdated" | default "Last updated" }}
+    <time datetime="{{ $lastmod.Format "2006-01-02" }}" title="{{ substr .Hash 0 7 }}">
+      {{ $lastmod.Format "Jan 2, 2006" }}
+    </time>
+  </p>
+{{- end }}

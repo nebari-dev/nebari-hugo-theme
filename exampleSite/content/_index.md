@@ -23,9 +23,17 @@ def greet(name: str) -> str:
 | Dark mode | shipped |
 | Code highlighting | shipped |
 | Multi-tab nav | shipped |
-| Client-side search (Fuse.js) | shipped |
+| Client-side search (Fuse.js, `/` shortcut) | shipped |
+| Copy buttons on code blocks | shipped |
+| Mermaid diagrams | shipped |
+| Heading anchor permalinks | shipped |
+| Breadcrumbs | shipped |
+| Last-updated stamp (`enableGitInfo`) | shipped |
+| i18n (`i18n/<code>.toml` + `[languages.*]`) | shipped |
+| Versioning (`[[params.versions]]` dropdown) | shipped |
+| 404 page | shipped |
 | Edit-on-GitHub link | not yet |
-| Table of contents | not yet |
+| Table of contents widget | not yet |
 
 ## Inline `code` and a [link](https://www.nebari.dev/).
 

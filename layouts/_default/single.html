@@ -1,7 +1,9 @@
 {{ define "main" }}
+  {{ partial "breadcrumbs.html" . }}
   <article>
     <h1>{{ .Title }}</h1>
-    {{ with .Description }}<p style="color: var(--muted-foreground); font-size: 1.05rem; margin-bottom: 1.5rem;">{{ . }}</p>{{ end }}
+    {{ with .Description }}<p class="page-lede">{{ . }}</p>{{ end }}
+    {{ partial "last-updated.html" . }}
     {{ .Content }}
   </article>
 {{ end }}
