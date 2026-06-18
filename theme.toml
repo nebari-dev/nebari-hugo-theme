@@ -1,5 +1,5 @@
 name = "Nebari Hugo Theme"
-license = "BSD-3-Clause"
+license = "Apache-2.0"
 licenselink = "https://github.com/nebari-dev/nebari-hugo-theme/blob/main/LICENSE"
 description = "Minimal Hugo theme for Nebari software-pack documentation sites. Imports the @nebari/theme OKLCH color tokens from nebari-design so docs stay visually consistent with the rest of the Nebari ecosystem."
 

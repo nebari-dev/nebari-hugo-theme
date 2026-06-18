@@ -27,7 +27,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/nebari-dev/nebari-hugo-theme/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-BSD_3--Clause-blue.svg" alt="License"></a>
+  <a href="https://github.com/nebari-dev/nebari-hugo-theme/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-Apache_2.0-blue.svg" alt="License"></a>
   <a href="https://gohugo.io"><img src="https://img.shields.io/badge/Hugo-0.116%2B-FF4088?logo=hugo&logoColor=white" alt="Hugo 0.116+"></a>
   <a href="https://www.typescriptlang.org"><img src="https://img.shields.io/badge/TypeScript-5.x-3178C6?logo=typescript&logoColor=white" alt="TypeScript"></a>
   <a href="https://github.com/nebari-dev/nebari-design"><img src="https://img.shields.io/badge/Tokens-%40nebari%2Ftheme-5809B3" alt="Powered by @nebari/theme"></a>
@@ -56,10 +56,10 @@ A small Hugo theme module that does **two things**:
    section grouping + dark-mode toggle + content / footer — so a consuming pack's repo only needs `content/*.md`
    and a 30-line `hugo.toml`.
 
-Inspired by [`aktech/darby`](https://github.com/aktech/darby) — keeps the same fundamentals (multi-tab nav,
-Fuse-backed search, dark code-on-light-page, sticky header) while trimming features less load-bearing for pack
-docs (no in-browser LLM "Ask Assistant", no megamenu, no blog mode) and pulling visual identity from
-`@nebari/theme` directly.
+Scope is intentionally narrow vs general-purpose Hugo doc themes (Doks, Hextra, Geekdoc): no in-browser LLM
+assistant, no megamenu, no blog mode. Visual identity comes from `@nebari/theme` directly so packs inherit the
+same OKLCH palette, Inter + Fira Code typography, and primary purple as the rest of the Nebari ecosystem (apps,
+dashboards, the design system itself).
 
 | | Light | Dark |
 | :---: | :---: | :---: |
@@ -139,8 +139,7 @@ docs/
   static/           # optional, pack-specific assets
 ```
 
-That's the target footprint, matching Amit's
-[`aktech/docs-site`](https://github.com/nebari-dev/nebari-data-science-pack/tree/aktech/docs-site) branch.
+That's the target footprint — pack maintainers ship docs content, the theme owns chrome.
 
 ## Local preview
 
@@ -242,14 +241,9 @@ if a feature is more pack-specific than docs-theme-specific, it probably belongs
 
 ## Acknowledgements
 
-[`aktech/darby`](https://github.com/aktech/darby) by Amit Kumar — Amit's Hugo theme used on
-`nebari-data-science-pack`'s docs spike. This theme keeps darby's general shape and trims out features pack docs
-don't need (browser-LLM assistant, blog mode, megamenu) in favor of being thin and importing the Nebari design
-tokens directly.
-
 [`@nebari/theme`](https://github.com/nebari-dev/nebari-design) — the OKLCH token source-of-truth. Refresh the
 copied tokens in `assets/css/main.css` when upstream changes.
 
 ## License
 
-[BSD-3-Clause](LICENSE) — same as the rest of the Nebari Infrastructure Core stack.
+[Apache 2.0](LICENSE) — same as the rest of the Nebari Infrastructure Core stack.
