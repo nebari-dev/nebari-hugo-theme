@@ -1,0 +1,13 @@
+name = "Nebari Hugo Theme"
+license = "BSD-3-Clause"
+licenselink = "https://github.com/nebari-dev/nebari-hugo-theme/blob/main/LICENSE"
+description = "Minimal Hugo theme for Nebari software-pack documentation sites. Imports the @nebari/theme OKLCH color tokens from nebari-design so docs stay visually consistent with the rest of the Nebari ecosystem."
+
+homepage = "https://github.com/nebari-dev/nebari-hugo-theme"
+
+tags = ["docs", "nebari", "software-pack"]
+features = ["sidebar", "syntax-highlighting", "dark-mode", "oklch-tokens"]
+
+[author]
+  name = "Nebari"
+  homepage = "https://www.nebari.dev/"

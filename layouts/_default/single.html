@@ -1,0 +1,7 @@
+{{ define "main" }}
+  <article>
+    <h1>{{ .Title }}</h1>
+    {{ with .Description }}<p style="color: var(--muted-foreground); font-size: 1.05rem; margin-bottom: 1.5rem;">{{ . }}</p>{{ end }}
+    {{ .Content }}
+  </article>
+{{ end }}

@@ -1,0 +1,32 @@
+{{/*
+  Sidebar. Reads `[[params.sidebar]]` arrays from hugo.toml of the
+  consuming site. Each section has a `heading` and a list of `items`,
+  where each item is either {label, url} (real page) or
+  {label, soon=true} (stub). The active link is the one whose `url`
+  matches the current page's RelPermalink.
+*/}}
+<aside class="sidebar">
+  <nav aria-label="Docs navigation">
+    {{ range site.Params.sidebar }}
+      <div class="sidebar__section">
+        <h3 class="sidebar__heading">{{ .heading }}</h3>
+        <ul class="sidebar__list">
+          {{ range .items }}
+            <li>
+              {{ if .url }}
+                {{ $href := .url | relURL }}
+                {{ $active := eq (strings.TrimRight "/" $href) (strings.TrimRight "/" $.RelPermalink) }}
+                <a href="{{ $href }}" class="sidebar__link{{ if $active }} sidebar__link--active{{ end }}">{{ .label }}</a>
+              {{ else }}
+                <span class="sidebar__stub">
+                  <span>{{ .label }}</span>
+                  {{ if .soon }}<span class="sidebar__badge">soon</span>{{ end }}
+                </span>
+              {{ end }}
+            </li>
+          {{ end }}
+        </ul>
+      </div>
+    {{ end }}
+  </nav>
+</aside>

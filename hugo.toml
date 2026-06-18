@@ -1,0 +1,39 @@
+# Example config used when running `hugo server` directly inside this
+# repo to preview the theme. Consuming sites write their own hugo.toml
+# and import this theme as a Hugo Module.
+baseURL = 'https://example.org/'
+languageCode = 'en-US'
+title = 'nebari-hugo-theme demo'
+# theme = 'nebari-hugo-theme'  # not needed when running from inside the theme repo
+
+[markup]
+  [markup.highlight]
+    noClasses   = false
+    codeFences  = true
+    guessSyntax = true
+  [markup.goldmark.renderer]
+    unsafe = true
+
+[params]
+  description = "Minimal Hugo theme for Nebari software-pack docs."
+  repo        = "https://github.com/nebari-dev/nebari-hugo-theme"
+
+  [[params.sidebar]]
+    heading = "Demo pages"
+    [[params.sidebar.items]]
+      label = "Home"
+      url   = "/"
+
+  [[params.sidebar]]
+    heading = "Future"
+    [[params.sidebar.items]]
+      label = "Customization"
+      soon  = true
+    [[params.sidebar.items]]
+      label = "Components"
+      soon  = true
+
+[module]
+  [module.hugoVersion]
+    extended = false
+    min = "0.116.0"
