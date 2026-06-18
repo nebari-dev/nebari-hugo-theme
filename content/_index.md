@@ -22,7 +22,10 @@ def greet(name: str) -> str:
 | Sidebar | shipped |
 | Dark mode | shipped |
 | Code highlighting | shipped |
-| Pagefind search | not yet |
+| Multi-tab nav | shipped |
+| Client-side search (Fuse.js) | shipped |
+| Edit-on-GitHub link | not yet |
+| Table of contents | not yet |
 
 ## Inline `code` and a [link](https://www.nebari.dev/).
 

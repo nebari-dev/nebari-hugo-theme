@@ -15,7 +15,18 @@
 
     {{ partial "footer.html" . }}
 
-    {{ $themeJS := resources.Get "js/theme-toggle.js" | resources.Minify | resources.Fingerprint }}
-    <script src="{{ $themeJS.RelPermalink }}" integrity="{{ $themeJS.Data.Integrity }}" defer></script>
+    {{/*
+      Two TS modules, bundled via Hugo's esbuild integration. Both are
+      defer/module so they don't block first paint.
+      - theme-toggle.ts wires the sun/moon click handler
+      - search.ts loads /index.json + Fuse on first input focus
+    */}}
+    {{ $tsOpts := dict "minify" true "target" "es2020" "format" "esm" }}
+    {{ $themeJS  := resources.Get "js/theme-toggle.ts" | js.Build $tsOpts | fingerprint }}
+    {{ $searchJS := resources.Get "js/search.ts"       | js.Build $tsOpts | fingerprint }}
+    <script type="module" src="{{ $themeJS.RelPermalink  }}" integrity="{{ $themeJS.Data.Integrity  }}"></script>
+    {{ if not (eq site.Params.search false) }}
+      <script type="module" src="{{ $searchJS.RelPermalink }}" integrity="{{ $searchJS.Data.Integrity }}"></script>
+    {{ end }}
   </body>
 </html>
