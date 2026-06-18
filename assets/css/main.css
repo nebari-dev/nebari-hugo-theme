@@ -864,6 +864,60 @@ a:hover { text-decoration: underline; }
   }
 }
 
+/* ------- Callout / admonition ------- */
+
+/*
+ * Type-to-color mapping (Nebari brand palette):
+ *   note     → --primary  (purple/magenta from existing token)
+ *   tip      → #20AAA1    (Nebari teal/green — no token exists)
+ *   warning  → #EAB54E    (Nebari yellow — no token exists)
+ *   caution  → #f38ba8    (Catppuccin Mocha red, already used for diff-)
+ */
+
+.callout {
+  border-left: 4px solid var(--border-strong);
+  background: color-mix(in oklch, var(--muted) 80%, transparent);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 0.75rem 1rem;
+  margin: 1.25rem 0;
+}
+
+.callout__title {
+  font-family: 'Poppins', system-ui, sans-serif;
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0 0 0.4rem;
+}
+
+.callout__body { margin: 0; }
+.callout__body > *:last-child { margin-bottom: 0; }
+
+.callout--note {
+  border-left-color: var(--primary);
+  background: color-mix(in oklch, var(--primary) 8%, var(--background));
+}
+.callout--note .callout__title { color: var(--primary); }
+
+.callout--tip {
+  border-left-color: #20AAA1;
+  background: color-mix(in srgb, #20AAA1 8%, transparent);
+}
+.callout--tip .callout__title { color: #20AAA1; }
+
+.callout--warning {
+  border-left-color: #EAB54E;
+  background: color-mix(in srgb, #EAB54E 8%, transparent);
+}
+.callout--warning .callout__title { color: #c9951f; }
+
+.callout--caution {
+  border-left-color: #f38ba8;
+  background: color-mix(in srgb, #f38ba8 8%, transparent);
+}
+.callout--caution .callout__title { color: #f38ba8; }
+
 /* ------- Footer ------- */
 
 .site-footer {

@@ -55,3 +55,15 @@ other = "Menú"
 
 [editPage]
 other = "Editar esta página en GitHub"
+
+[callout_note]
+other = "Nota"
+
+[callout_tip]
+other = "Consejo"
+
+[callout_warning]
+other = "Advertencia"
+
+[callout_caution]
+other = "Precaución"
