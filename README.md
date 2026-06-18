@@ -159,6 +159,29 @@ docs/
 
 That's the target footprint — pack maintainers ship docs content, the theme owns chrome.
 
+### Versioned docs (without copying your docs)
+
+The theme renders a version dropdown from `[[params.versions]]`. Each version is an
+independently-deployed site — the current docs at the root, each past version under a
+`/vX.Y/` subpath:
+
+```toml
+[[params.versions]]
+  label   = "v0.2 (latest)"
+  url     = "https://nebari-dev.github.io/<pack>/"   # cross-deploy URL, emitted verbatim
+  current = true
+[[params.versions]]
+  label = "v0.1"
+  url   = "https://nebari-dev.github.io/<pack>/v0.1/"
+```
+
+You never keep a `v0.1/` folder in your repo. Each version already exists as the **git
+tag** you cut at release; CI rebuilds the current docs at the root and each tag into its
+`/vX.Y/` subpath, then uploads one combined Pages artifact. The full recipe (and the
+trade-offs) live on the demo's **[Versioning page](https://nebari-dev.github.io/nebari-hugo-theme/versioning/)**;
+`exampleSite/`'s own deploy uses it to publish a working
+[`/v0.1/`](https://nebari-dev.github.io/nebari-hugo-theme/v0.1/) snapshot.
+
 ## Local preview
 
 Clone, then use the bundled `Makefile`:

@@ -49,14 +49,20 @@ defaultContentLanguageInSubdir = false
   editBase    = "https://github.com/nebari-dev/nebari-hugo-theme/edit/main/exampleSite/content"
 
   # Versioning: rendered as a dropdown next to the search box. The
-  # `current = true` entry is what's shown on the trigger.
+  # `current = true` entry is shown on the trigger.
+  #
+  # Each version is an independently-deployed site, so `url` is a
+  # CROSS-DEPLOY URL (absolute). This is what makes "no copy of the docs"
+  # work: the current docs live at the root, and each past version is
+  # rebuilt from its git tag into a /vX.Y/ subpath at deploy time — see
+  # content/versioning.md (rendered as the "Versioning" page) for the recipe.
   [[params.versions]]
-    label   = "v0.2 (current)"
-    url     = "/"
+    label   = "v0.2 (latest)"
+    url     = "https://nebari-dev.github.io/nebari-hugo-theme/"
     current = true
   [[params.versions]]
     label = "v0.1"
-    url   = "https://example.org/v0.1/"
+    url   = "https://nebari-dev.github.io/nebari-hugo-theme/v0.1/"
 
   # Multi-tab top nav. Each tab's URL determines which pages "belong"
   # to it (RelPermalink prefix match).
@@ -95,6 +101,9 @@ defaultContentLanguageInSubdir = false
     [[params.sidebar.items]]
       label = "CI/CD and Releasing"
       url   = "/cicd-and-releasing/"
+    [[params.sidebar.items]]
+      label = "Versioning"
+      url   = "/versioning/"
 
 [module]
   [module.hugoVersion]

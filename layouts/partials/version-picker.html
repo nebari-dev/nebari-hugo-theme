@@ -2,12 +2,19 @@
   Version picker. Reads [[params.versions]] from the consuming site:
 
     [[params.versions]]
-      label   = "v0.2 (current)"
-      url     = "/"
+      label   = "v0.2 (latest)"
+      url     = "https://nebari-dev.github.io/<pack>/"
       current = true
     [[params.versions]]
       label = "v0.1"
       url   = "https://nebari-dev.github.io/<pack>/v0.1/"
+
+  Each version is an independently-deployed site, so `url` must be a
+  CROSS-DEPLOY URL — an absolute URL (or a site-root-relative path like
+  `/<pack>/v0.1/`). It is emitted verbatim, NOT run through relURL: a page
+  served under `/<pack>/v0.1/` has to link UP-and-OVER to `/<pack>/v0.2/`,
+  which a baseURL-relative URL can't express. See the "Versioning" page in
+  exampleSite for the full deploy recipe.
 
   Renders nothing if no versions are configured. The "current" version
   is whichever entry has `current = true` (falls back to the first).
@@ -25,7 +32,7 @@
     <ul role="menu">
       {{- range . }}
         <li>
-          <a href="{{ strings.TrimPrefix "/" .url | relLangURL }}"{{ if .current }} aria-current="true"{{ end }}>{{ .label }}</a>
+          <a href="{{ .url }}"{{ if .current }} aria-current="true"{{ end }}>{{ .label }}</a>
         </li>
       {{- end }}
     </ul>
