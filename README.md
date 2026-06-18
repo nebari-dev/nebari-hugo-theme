@@ -65,6 +65,7 @@ docs (no in-browser LLM "Ask Assistant", no megamenu, no blog mode) and pulling 
 | :---: | :---: | :---: |
 | Home  | ![Home — light](docs/screenshots/hero-light.png) | ![Home — dark](docs/screenshots/hero-dark.png) |
 | Inner | ![Components page — light](docs/screenshots/components-light.png) | ![Components page — dark](docs/screenshots/components-dark.png) |
+| 404   | ![404 — light](docs/screenshots/404-light.png) | ![404 — dark](docs/screenshots/404-dark.png) |
 
 ## Use in a pack
 
@@ -173,12 +174,20 @@ loop, not an out-of-band script.
 | Sticky multi-tab top nav (`[[params.tabs]]`) | shipped | `layouts/partials/header.html` |
 | Left sidebar with section grouping (`[[params.sidebar]]`) | shipped | `layouts/partials/sidebar.html` |
 | Dark-mode toggle with FOUC prevention | shipped | `layouts/partials/head.html` + `assets/js/theme-toggle.ts` |
-| Client-side fuzzy search (Fuse.js 7.1) | shipped | `assets/js/search.ts` + `layouts/_default/index.json` |
+| Client-side fuzzy search (Fuse.js 7.1) with `/`-focus shortcut | shipped | `assets/js/search.ts` + `layouts/_default/index.json` |
+| Copy buttons on every code block | shipped | `assets/js/copy.ts` |
+| Mermaid diagrams (lazy-loaded from CDN) | shipped | `assets/js/mermaid-init.ts` |
+| Heading anchor permalinks (`#` on hover) | shipped | `layouts/_default/_markup/render-heading.html` |
+| Breadcrumbs (`Home › Section › Page`) | shipped | `layouts/partials/breadcrumbs.html` |
+| Last-updated stamp (requires `enableGitInfo = true`) | shipped | `layouts/partials/last-updated.html` |
+| i18n (`i18n/<code>.toml` + `[languages.*]` blocks) | shipped | `i18n/{en,es}.toml` + `layouts/partials/language-picker.html` |
+| Versioning (`[[params.versions]]` dropdown) | shipped | `layouts/partials/version-picker.html` |
+| Themed 404 page with home / report-issue actions | shipped | `layouts/404.html` |
 | Catppuccin Mocha code highlighting (Chroma) | shipped | `assets/css/main.css` |
 | Fira Code in code blocks, Inter in body | shipped | `assets/css/main.css` |
 | `@nebari/theme` OKLCH token import | shipped | `assets/css/main.css` |
 | Edit-on-GitHub link | not yet | — |
-| Table of contents widget | not yet | — |
+| Table of contents widget (right sidebar) | not yet | — |
 | `prefers-reduced-motion` audit | not yet | — |
 
 ## Architecture

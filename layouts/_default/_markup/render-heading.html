@@ -1,0 +1,14 @@
+{{- /*
+  Custom heading renderer: H2+ headings get a permalink anchor that
+  appears on hover (and is keyboard-focusable). H1 is left bare since
+  the page title is the H1 and isn't typically deep-linked.
+*/ -}}
+{{- $level := .Level -}}
+{{- $anchor := .Anchor -}}
+{{- $text := .Text | safeHTML -}}
+<h{{ $level }} id="{{ $anchor }}">
+  {{ $text }}
+  {{- if gt $level 1 }}
+    <a class="heading-anchor" href="#{{ $anchor }}" aria-label="Permalink to this heading">#</a>
+  {{- end }}
+</h{{ $level }}>

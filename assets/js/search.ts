@@ -143,6 +143,20 @@ function wire(ui: SearchUI, indexURL: string): void {
   });
 }
 
+function wireKeyboardShortcut(input: HTMLInputElement): void {
+  document.addEventListener('keydown', (ev) => {
+    // Ignore when the user is already typing in a form field.
+    const target = ev.target as HTMLElement | null;
+    const tag = target?.tagName;
+    if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' || target?.isContentEditable) return;
+    if (ev.key === '/' && !ev.metaKey && !ev.ctrlKey && !ev.altKey) {
+      ev.preventDefault();
+      input.focus();
+      input.select();
+    }
+  });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   const input = document.getElementById('search-input') as HTMLInputElement | null;
   const drawer = document.getElementById('search-drawer');
@@ -151,6 +165,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (!input || !drawer || !list || !empty) return;
   const indexURL = input.dataset.indexUrl ?? '/index.json';
   wire({ input, drawer, list, empty }, indexURL);
+  wireKeyboardShortcut(input);
 });
 
 export {};

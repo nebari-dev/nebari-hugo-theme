@@ -1,0 +1,32 @@
+{{/*
+  Language picker. Renders nothing unless the consuming site has more
+  than one [languages.<code>] block configured. Switches the current
+  page to its translation (.Translations) when one exists; otherwise
+  links to the language's home.
+*/}}
+{{- if gt (len site.Languages) 1 }}
+  <details class="lang-picker">
+    <summary aria-label="Switch language">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="12" cy="12" r="10"></circle>
+        <path d="M2 12h20M12 2a15.3 15.3 0 0 1 0 20M12 2a15.3 15.3 0 0 0 0 20"></path>
+      </svg>
+      <span>{{ site.Language.LanguageName | default site.Language.Lang }}</span>
+    </summary>
+    <ul role="menu">
+      {{- range site.Languages -}}
+        {{- $lang := . -}}
+        {{- $href := "" -}}
+        {{- with $.AllTranslations -}}
+          {{- range . -}}
+            {{- if eq .Language.Lang $lang.Lang -}}
+              {{- $href = .RelPermalink -}}
+            {{- end -}}
+          {{- end -}}
+        {{- end -}}
+        {{- if not $href -}}{{- $href = printf "/%s/" $lang.Lang | relURL -}}{{- end -}}
+        <li><a href="{{ $href }}"{{ if eq $lang.Lang site.Language.Lang }} aria-current="true"{{ end }}>{{ $lang.LanguageName | default $lang.Lang }}</a></li>
+      {{- end }}
+    </ul>
+  </details>
+{{- end }}

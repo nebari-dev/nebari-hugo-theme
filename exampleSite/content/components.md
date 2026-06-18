@@ -40,6 +40,18 @@ nebariapp:
 | `--background` | `oklch(1 0 0)` | `oklch(0.1743 0.0105 276.35)` |
 | `--foreground` | `oklch(0.1743 0.0105 276.35)` | `oklch(0.985 0 0)` |
 
+## Mermaid diagrams
+
+Fenced ` ```mermaid ` blocks are lazy-rendered by `assets/js/mermaid-init.ts`.
+
+```mermaid
+flowchart LR
+    A[Markdown] -->|hugo build| B[HTML]
+    B --> C{theme}
+    C -->|@nebari/theme tokens| D[styled output]
+    C -->|class-emitted Chroma| E[code blocks]
+```
+
 ## Blockquotes
 
 > Quoted text picks up the primary purple bar on the left and a muted

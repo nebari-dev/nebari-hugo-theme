@@ -1,0 +1,29 @@
+{{/*
+  Breadcrumbs: Home › Section › Page. Walks .Parent up the tree, skips
+  on the home page itself. The current page is the last item and is not
+  a link.
+*/}}
+{{- if not .IsHome }}
+  {{- $crumbs := slice -}}
+  {{- $p := . -}}
+  {{- range seq 10 -}}
+    {{- if and $p (not (eq $p.Permalink site.Home.Permalink)) -}}
+      {{- $crumbs = $crumbs | append (dict "title" $p.Title "url" $p.RelPermalink "isCurrent" (eq $p.Permalink $.Permalink)) -}}
+      {{- $p = $p.Parent -}}
+    {{- end -}}
+  {{- end -}}
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <ol>
+      <li><a href="{{ "/" | relURL }}">{{ i18n "home" | default "Home" }}</a></li>
+      {{- range $crumb := (collections.Reverse $crumbs) }}
+        <li>
+          {{- if $crumb.isCurrent -}}
+            <span aria-current="page">{{ $crumb.title }}</span>
+          {{- else -}}
+            <a href="{{ $crumb.url }}">{{ $crumb.title }}</a>
+          {{- end -}}
+        </li>
+      {{- end }}
+    </ol>
+  </nav>
+{{- end }}

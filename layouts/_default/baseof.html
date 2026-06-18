@@ -22,9 +22,13 @@
       - search.ts loads /index.json + Fuse on first input focus
     */}}
     {{ $tsOpts := dict "minify" true "target" "es2020" "format" "esm" }}
-    {{ $themeJS  := resources.Get "js/theme-toggle.ts" | js.Build $tsOpts | fingerprint }}
-    {{ $searchJS := resources.Get "js/search.ts"       | js.Build $tsOpts | fingerprint }}
-    <script type="module" src="{{ $themeJS.RelPermalink  }}" integrity="{{ $themeJS.Data.Integrity  }}"></script>
+    {{ $themeJS   := resources.Get "js/theme-toggle.ts"  | js.Build $tsOpts | fingerprint }}
+    {{ $searchJS  := resources.Get "js/search.ts"        | js.Build $tsOpts | fingerprint }}
+    {{ $copyJS    := resources.Get "js/copy.ts"          | js.Build $tsOpts | fingerprint }}
+    {{ $mermaidJS := resources.Get "js/mermaid-init.ts"  | js.Build $tsOpts | fingerprint }}
+    <script type="module" src="{{ $themeJS.RelPermalink   }}" integrity="{{ $themeJS.Data.Integrity   }}"></script>
+    <script type="module" src="{{ $copyJS.RelPermalink    }}" integrity="{{ $copyJS.Data.Integrity    }}"></script>
+    <script type="module" src="{{ $mermaidJS.RelPermalink }}" integrity="{{ $mermaidJS.Data.Integrity }}"></script>
     {{ if not (eq site.Params.search false) }}
       <script type="module" src="{{ $searchJS.RelPermalink }}" integrity="{{ $searchJS.Data.Integrity }}"></script>
     {{ end }}
