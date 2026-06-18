@@ -46,3 +46,6 @@ other = "Powered by nebari-design"
 
 [builtBy]
 other = "Built by Nebari"
+
+[onThisPage]
+other = "On this page"

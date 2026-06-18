@@ -34,6 +34,9 @@ defaultContentLanguageInSubdir = false
     guessSyntax = true
   [markup.goldmark.renderer]
     unsafe = true
+  [markup.tableOfContents]
+    startLevel = 2
+    endLevel   = 3
 
 # Required for client-side Fuse.js search — the home page must emit
 # /index.json so search.ts can fetch and index it.

@@ -1,9 +1,12 @@
 {{ define "main" }}
   {{ partial "breadcrumbs.html" . }}
-  <article>
-    <h1>{{ .Title }}</h1>
-    {{ with .Description }}<p class="page-lede">{{ . }}</p>{{ end }}
-    {{ partial "last-updated.html" . }}
-    {{ .Content }}
-  </article>
+  <div class="page-with-toc">
+    <article>
+      <h1>{{ .Title }}</h1>
+      {{ with .Description }}<p class="page-lede">{{ . }}</p>{{ end }}
+      {{ partial "last-updated.html" . }}
+      {{ .Content }}
+    </article>
+    {{ partial "toc.html" . }}
+  </div>
 {{ end }}

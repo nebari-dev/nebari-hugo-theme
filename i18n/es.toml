@@ -46,3 +46,6 @@ other = "Hecho con nebari-design"
 
 [builtBy]
 other = "Hecho por Nebari"
+
+[onThisPage]
+other = "En esta página"
