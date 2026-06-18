@@ -46,6 +46,7 @@ defaultContentLanguageInSubdir = false
 [params]
   description = "Minimal Hugo theme for Nebari software-pack docs."
   repo        = "https://github.com/nebari-dev/nebari-hugo-theme"
+  editBase    = "https://github.com/nebari-dev/nebari-hugo-theme/edit/main/exampleSite/content"
 
   # Versioning: rendered as a dropdown next to the search box. The
   # `current = true` entry is what's shown on the trigger.

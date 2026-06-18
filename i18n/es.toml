@@ -52,3 +52,6 @@ other = "En esta página"
 
 [menu]
 other = "Menú"
+
+[editPage]
+other = "Editar esta página en GitHub"

@@ -93,6 +93,10 @@ theme        = ["github.com/nebari-dev/nebari-hugo-theme"]
   description = "One-line tagline shown under the title."
   repo        = "https://github.com/nebari-dev/<your-pack>"
   search      = true   # set to false to hide the search input
+  # Optional: renders an "Edit this page on GitHub" link at the bottom of every
+  # single page.  Set to the GitHub edit URL prefix up to (but not including)
+  # the content-root path.  Example:
+  editBase    = "https://github.com/nebari-dev/<your-pack>/edit/main/docs/content"
 
 # Top-nav tabs. Active tab is determined by RelPermalink-prefix match.
 [[params.tabs]]
@@ -185,7 +189,7 @@ loop, not an out-of-band script.
 | Catppuccin Mocha code highlighting (Chroma) | shipped | `assets/css/main.css` |
 | Fira Code in code blocks, Inter in body | shipped | `assets/css/main.css` |
 | `@nebari/theme` OKLCH token import | shipped | `assets/css/main.css` |
-| Edit-on-GitHub link | not yet | — |
+| Edit-on-GitHub link (`params.editBase`) | shipped | `layouts/partials/edit-link.html` |
 | Table of contents widget (right sidebar) | not yet | — |
 | `prefers-reduced-motion` audit | not yet | — |
 

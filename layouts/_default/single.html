@@ -6,6 +6,7 @@
       {{ with .Description }}<p class="page-lede">{{ . }}</p>{{ end }}
       {{ partial "last-updated.html" . }}
       {{ .Content }}
+      {{ partial "edit-link.html" . }}
     </article>
     {{ partial "toc.html" . }}
   </div>
