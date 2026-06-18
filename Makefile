@@ -10,7 +10,7 @@ CHROME      ?= google-chrome
 WINDOW_SIZE ?= 1440,1200
 MOBILE_SIZE ?= 390,1500
 
-.PHONY: help dev build preview clean screenshots tidy check-tokens
+.PHONY: help dev build preview clean screenshots tidy check-tokens check-readme
 
 help: ## Print this help.
 	@awk 'BEGIN {FS = ":.*?## "} /^[a-zA-Z_-]+:.*?## / {printf "  \033[36m%-12s\033[0m %s\n", $$1, $$2}' $(MAKEFILE_LIST)
@@ -78,6 +78,9 @@ check-tokens: ## Diff vendored tokens against upstream nebari-design globals.css
 	  echo "Tokens: DRIFT DETECTED - diff (upstream vs vendored):"; \
 	  echo "$$DIFF"; \
 	fi
+
+check-readme: ## Verify README paths/targets still match the repo (drift check)
+	bash scripts/check-readme.sh
 
 clean: ## Remove build artifacts
 	rm -rf $(EXAMPLE)/public $(EXAMPLE)/resources $(EXAMPLE)/.hugo_build.lock

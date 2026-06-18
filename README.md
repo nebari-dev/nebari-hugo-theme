@@ -250,6 +250,7 @@ Quick loop:
 make dev                       # live preview
 # … edit assets/, layouts/, content in exampleSite/content/ …
 make screenshots               # regenerate README images when chrome changes
+make check-readme              # verify README still matches the repo (also runs in CI)
 git commit -am "feat: …"
 ```
 
