@@ -1,0 +1,69 @@
+name: Auto-update generated assets
+
+# After a merge to main, regenerate the repo's committed-but-generated assets
+# (the README screenshots) and push them back. The push uses the
+# github-actions[bot] identity and a "[skip ci]" commit message so it does not
+# retrigger this workflow or the Pages deploy.
+#
+# Only runs when something that affects the rendered output changed, so doc- or
+# CI-only merges don't churn the screenshots.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "assets/**"
+      - "layouts/**"
+      - "exampleSite/**"
+      - "static/**"
+      - "i18n/**"
+      - "Makefile"
+  workflow_dispatch:
+
+# Push back to the repository.
+permissions:
+  contents: write
+
+# Never run two updaters at once; don't cancel an in-flight one mid-commit.
+concurrency:
+  group: auto-update
+  cancel-in-progress: false
+
+jobs:
+  screenshots:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0 # last-updated stamp + clean push need full history
+
+      - uses: actions/setup-go@v6
+        with:
+          go-version: "stable"
+
+      - uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: "0.159.0"
+          extended: true
+
+      # Resolve the Hugo module graph once so `hugo server` boots within the
+      # Makefile's startup wait when screenshots are captured.
+      - name: Warm Hugo modules
+        run: cd exampleSite && hugo --quiet
+
+      - name: Regenerate screenshots
+        run: make screenshots # uses the preinstalled google-chrome on the runner
+
+      - name: Commit and push if changed
+        run: |
+          if [ -z "$(git status --porcelain docs/screenshots)" ]; then
+            echo "No screenshot changes; nothing to commit."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/screenshots
+          git commit -m "chore(assets): regenerate screenshots [skip ci]"
+          # Rebase onto any commits that landed while we were building, then push.
+          git pull --rebase origin main
+          git push
