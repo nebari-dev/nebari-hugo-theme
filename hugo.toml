@@ -14,10 +14,26 @@ title = 'nebari-hugo-theme demo'
   [markup.goldmark.renderer]
     unsafe = true
 
+# Required for client-side Fuse.js search — the home page must emit
+# /index.json so search.ts can fetch and index it.
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
+
 [params]
   description = "Minimal Hugo theme for Nebari software-pack docs."
   repo        = "https://github.com/nebari-dev/nebari-hugo-theme"
 
+  # Multi-tab top nav. Each tab's URL determines which pages "belong"
+  # to it (RelPermalink prefix match).
+  [[params.tabs]]
+    name = "Demo"
+    url  = "/"
+  [[params.tabs]]
+    name = "Components"
+    url  = "/components/"
+
+  # Sidebar tree. Items are either {label, url} (real page) or
+  # {label, soon=true} (stub with "soon" badge).
   [[params.sidebar]]
     heading = "Demo pages"
     [[params.sidebar.items]]

@@ -2,7 +2,9 @@
 
 Minimal Hugo theme for [Nebari](https://www.nebari.dev/) software-pack documentation sites.
 
-Imports the OKLCH color tokens from [`nebari-design`](https://github.com/nebari-dev/nebari-design)'s `@nebari/theme` so pack docs stay visually consistent with the rest of the Nebari ecosystem (apps, dashboards, the design system itself). Layout is intentionally small: header + left sidebar + content + footer, dark-mode toggle, Catppuccin Mocha syntax highlighting via class-emitted Chroma, Fira Code in code blocks.
+Imports the OKLCH color tokens from [`nebari-design`](https://github.com/nebari-dev/nebari-design)'s `@nebari/theme` so pack docs stay visually consistent with the rest of the Nebari ecosystem (apps, dashboards, the design system itself). Layout is intentionally small: header + left sidebar + content + footer, dark-mode toggle, Catppuccin Mocha syntax highlighting via class-emitted Chroma, Fira Code in code blocks, multi-tab top nav, client-side fuzzy search via Fuse.js.
+
+JS lives in `assets/js/*.ts` and is bundled through Hugo's built-in esbuild (`js.Build`) — TypeScript is the source-of-truth, the compiled `.js` is a build artifact.
 
 Compared with general-purpose Hugo doc themes (Doks, Hextra, Geekdocs), this theme:
 
@@ -33,12 +35,27 @@ theme  = "nebari-hugo-theme"
   [markup.goldmark.renderer]
     unsafe = true
 
+# Enables client-side search — emits /index.json the search.ts module fetches.
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
+
 [params]
   # Optional. Defaults shown.
   logo        = "https://raw.githubusercontent.com/nebari-dev/nebari-design/main/logo-mark/horizontal/standard/Nebari-Logo-Horizontal-Lockup.png"
   repo        = "https://github.com/nebari-dev/<your-pack>"
   description = "One-line tagline shown under the title."
+  search      = true   # set to false to hide the search input entirely
 
+# Top-nav tabs. Active tab is the one whose URL prefix matches the
+# current page's RelPermalink.
+[[params.tabs]]
+  name = "Guides"
+  url  = "/guides/"
+[[params.tabs]]
+  name = "Reference"
+  url  = "/reference/"
+
+# Sidebar tree.
 [[params.sidebar]]
   heading = "Getting Started"
   [[params.sidebar.items]]

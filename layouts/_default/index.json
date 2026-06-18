@@ -1,0 +1,21 @@
+{{- /*
+  Search index for Fuse.js client-side search.
+
+  Emits one record per HTML page: title, url, section, summary, and a
+  plain-text rendering of the content. The consuming site must include
+  "JSON" in its [outputs] home key for this template to run:
+
+    [outputs]
+      home = ["HTML", "RSS", "JSON"]
+*/ -}}
+{{- $pages := slice -}}
+{{- range where site.RegularPages "Kind" "page" -}}
+  {{- $pages = $pages | append (dict
+      "title"   .Title
+      "url"     .RelPermalink
+      "section" (.Section | humanize)
+      "summary" (.Summary | plainify | chomp)
+      "content" (.Plain | chomp)
+  ) -}}
+{{- end -}}
+{{- $pages | jsonify -}}
