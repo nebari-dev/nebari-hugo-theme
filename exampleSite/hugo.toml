@@ -1,10 +1,15 @@
-# Example config used when running `hugo server` directly inside this
-# repo to preview the theme. Consuming sites write their own hugo.toml
-# and import this theme as a Hugo Module.
-baseURL = 'https://example.org/'
-languageCode = 'en-US'
-title = 'nebari-hugo-theme demo'
-# theme = 'nebari-hugo-theme'  # not needed when running from inside the theme repo
+# Example site used to develop + preview the theme locally and capture
+# screenshots for the README. Run `hugo server -s exampleSite` from the
+# repo root, or use `make dev` / `make screenshots`.
+#
+# This site imports the parent directory as a Hugo Module — the `replace`
+# in `module.replacements` points the import path back at `../` so the
+# example always sees in-progress theme changes.
+
+baseURL      = "https://example.org/"
+languageCode = "en-US"
+title        = "nebari-hugo-theme demo"
+theme        = ["github.com/nebari-dev/nebari-hugo-theme"]
 
 [markup]
   [markup.highlight]
@@ -39,6 +44,9 @@ title = 'nebari-hugo-theme demo'
     [[params.sidebar.items]]
       label = "Home"
       url   = "/"
+    [[params.sidebar.items]]
+      label = "Components"
+      url   = "/components/"
 
   [[params.sidebar]]
     heading = "Future"
@@ -46,10 +54,15 @@ title = 'nebari-hugo-theme demo'
       label = "Customization"
       soon  = true
     [[params.sidebar.items]]
-      label = "Components"
+      label = "Edit-on-GitHub"
       soon  = true
 
 [module]
   [module.hugoVersion]
     extended = false
-    min = "0.116.0"
+    min      = "0.116.0"
+  [[module.imports]]
+    path = "github.com/nebari-dev/nebari-hugo-theme"
+  # Local development uses the replace directive in exampleSite/go.mod
+  # to point the import back at ../, so this site always sees
+  # uncommitted changes to the parent theme.
