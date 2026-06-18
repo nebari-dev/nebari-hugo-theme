@@ -4,7 +4,7 @@
   page to its translation (.Translations) when one exists; otherwise
   links to the language's home.
 */}}
-{{- if gt (len site.Languages) 1 }}
+{{- if gt (len hugo.Sites) 1 }}
   <details class="lang-picker">
     <summary aria-label="Switch language">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -14,8 +14,8 @@
       <span>{{ site.Language.LanguageName | default site.Language.Lang }}</span>
     </summary>
     <ul role="menu">
-      {{- range site.Languages -}}
-        {{- $lang := . -}}
+      {{- range hugo.Sites -}}
+        {{- $lang := .Language -}}
         {{- $href := "" -}}
         {{- with $.AllTranslations -}}
           {{- range . -}}

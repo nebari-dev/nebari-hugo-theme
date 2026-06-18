@@ -42,12 +42,12 @@
           </ul>
         </div>
       {{ end }}
-      {{ if gt (len site.Languages) 1 }}
+      {{ if gt (len hugo.Sites) 1 }}
         <div class="sidebar__group sidebar__group--static">
           <p class="sidebar__subhead">{{ i18n "language" | default "Language" }}</p>
           <ul class="sidebar__list">
-            {{ range site.Languages }}
-              {{ $lang := . }}
+            {{ range hugo.Sites }}
+              {{ $lang := .Language }}
               {{ $href := "" }}
               {{ with $.AllTranslations }}{{ range . }}{{ if eq .Language.Lang $lang.Lang }}{{ $href = .RelPermalink }}{{ end }}{{ end }}{{ end }}
               {{ if not $href }}{{ $href = printf "%s/" $lang.Lang | relURL }}{{ end }}
