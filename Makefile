@@ -10,7 +10,7 @@ CHROME      ?= google-chrome
 WINDOW_SIZE ?= 1440,1200
 MOBILE_SIZE ?= 390,1500
 
-.PHONY: help dev build preview clean screenshots tidy check-tokens check-readme
+.PHONY: help dev build preview clean screenshots tidy check-tokens check-readme test
 
 help: ## Print this help.
 	@awk 'BEGIN {FS = ":.*?## "} /^[a-zA-Z_-]+:.*?## / {printf "  \033[36m%-12s\033[0m %s\n", $$1, $$2}' $(MAKEFILE_LIST)
@@ -81,6 +81,9 @@ check-tokens: ## Diff vendored tokens against upstream nebari-design globals.css
 
 check-readme: ## Verify README paths/targets still match the repo (drift check)
 	bash scripts/check-readme.sh
+
+test: ## Run theme behaviour tests (responsive nav, table wrapping, …)
+	HUGO=$(HUGO) bash scripts/test-theme.sh
 
 clean: ## Remove build artifacts
 	rm -rf $(EXAMPLE)/public $(EXAMPLE)/resources $(EXAMPLE)/.hugo_build.lock

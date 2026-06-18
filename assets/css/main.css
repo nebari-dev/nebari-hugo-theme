@@ -319,13 +319,16 @@ a:hover { text-decoration: underline; }
 /* Hamburger button - hidden on desktop, shown on mobile */
 .nav-toggle { display: none; }
 
-/* Sidebar off-canvas overlay backdrop */
+/* Sidebar off-canvas overlay backdrop. z-index sits below the header (20)
+   but above page content, so the dimmed content closes the drawer on tap
+   while the header — and its hamburger toggle — stays interactive. The
+   drawer itself (.layout > .sidebar, z-index 30) renders above the backdrop. */
 .nav-backdrop {
   display: none;
   position: fixed;
   inset: 0;
   background: rgb(0 0 0 / 0.4);
-  z-index: 29;
+  z-index: 15;
 }
 .nav-backdrop--visible { display: block; }
 
@@ -376,7 +379,8 @@ a:hover { text-decoration: underline; }
 
   /* Drop secondary header chrome that doesn't fit a phone width:
      section tabs, the version + language pickers, and the brand
-     wordmark (the logo mark stays). */
+     wordmark (the logo mark stays). They are re-surfaced inside the
+     off-canvas drawer (.sidebar__mobile-nav) so they stay reachable. */
   .site-header__tabs,
   .version-picker,
   .lang-picker,
@@ -384,7 +388,25 @@ a:hover { text-decoration: underline; }
   .site-header__brand span {
     display: none;
   }
+
+  /* Show the drawer copy of tabs/version/language, with a divider above
+     the docs tree below it. */
+  .sidebar__mobile-nav {
+    display: block;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* Roomier tap targets on touch screens (≥40px). */
+  .icon-btn {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
 }
+
+/* Lock background scroll while the off-canvas drawer is open. */
+body.nav-open { overflow: hidden; }
 
 /* ------- Sidebar ------- */
 
@@ -399,6 +421,21 @@ a:hover { text-decoration: underline; }
 }
 
 .sidebar__section { margin-bottom: 1.5rem; }
+
+/* Mobile-only nav (tabs + version + language) lives inside the drawer.
+   Hidden on desktop, where the header carries that chrome. */
+.sidebar__mobile-nav { display: none; }
+
+.sidebar__group--static { margin-bottom: 1.5rem; }
+
+.sidebar__subhead {
+  margin: 0 0 0.5rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted-foreground);
+}
 
 /* Collapsible group wrapper (replaces the old .sidebar__section div) */
 .sidebar__group {
@@ -490,7 +527,7 @@ a:hover { text-decoration: underline; }
  * article column via 1fr, so we remove the hard cap and let the grid do the
  * work; the article stays readable because the grid column is naturally ~40-48rem
  * once the 14rem ToC column and 2rem gap are subtracted from the 80rem container. */
-.main { min-width: 0; padding: 2.5rem 0; max-width: 48rem; }
+.main { min-width: 0; padding: 2.5rem 0; max-width: 48rem; overflow-wrap: break-word; }
 .page-with-toc .main { max-width: none; }
 
 .main h1, .main h2, .main h3, .main h4, .main h5, .main h6 {
@@ -527,15 +564,28 @@ a:hover { text-decoration: underline; }
   color: var(--muted-foreground);
 }
 
+/* Tables are wrapped in .table-wrap by the table render hook
+   (layouts/_default/_markup/render-table.html) so a wide table scrolls
+   horizontally on narrow screens instead of crushing its columns or
+   pushing the whole page wider than the viewport. */
+.main .table-wrap {
+  margin: 1.25rem 0;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
 .main table {
   width: 100%;
   border-collapse: collapse;
-  margin: 1.25rem 0;
+  margin: 0;
   font-size: 0.9rem;
   border: 1px solid var(--border);
   border-radius: var(--radius);
   overflow: hidden;
 }
+/* Don't let table cells collapse to almost nothing on phones. */
+.main .table-wrap th,
+.main .table-wrap td { white-space: normal; min-width: 6rem; }
 .main th, .main td {
   padding: 0.55rem 0.85rem;
   text-align: left;

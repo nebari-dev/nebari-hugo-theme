@@ -53,6 +53,15 @@ other = "En esta página"
 [menu]
 other = "Menú"
 
+[sections]
+other = "Secciones"
+
+[version]
+other = "Versión"
+
+[language]
+other = "Idioma"
+
 [editPage]
 other = "Editar esta página en GitHub"
 

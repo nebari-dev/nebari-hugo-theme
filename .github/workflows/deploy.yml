@@ -34,6 +34,9 @@ jobs:
       - name: Check README drift
         run: bash scripts/check-readme.sh
 
+      - name: Run theme tests
+        run: bash scripts/test-theme.sh
+
       - id: pages
         if: github.event_name != 'pull_request'
         uses: actions/configure-pages@v6
