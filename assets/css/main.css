@@ -155,7 +155,7 @@ a:hover { text-decoration: underline; }
   font-weight: 600;
   font-size: 0.875rem;
 }
-.site-header__brand img { height: 1.5rem; }
+.site-header__brand img { height: 2rem; }
 .site-header__brand .sep { color: var(--muted-foreground); }
 
 .site-header__nav { display: flex; gap: 1.25rem; font-size: 0.875rem; margin-left: 0.5rem; }
