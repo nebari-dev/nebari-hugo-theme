@@ -138,7 +138,7 @@ a:hover { text-decoration: underline; }
 }
 
 .site-header__inner {
-  max-width: 80rem;
+  max-width: 100rem;
   margin: 0 auto;
   height: 3.5rem;
   padding: 0 1.5rem;
@@ -308,7 +308,7 @@ a:hover { text-decoration: underline; }
 /* ------- Layout ------- */
 
 .layout {
-  max-width: 80rem;
+  max-width: 100rem;
   margin: 0 auto;
   padding: 0 1.5rem;
   display: grid;
@@ -525,9 +525,9 @@ body.nav-open { overflow: hidden; }
 /* Default: constrain prose to a comfortable reading width. On pages that
  * carry the right-hand ToC (.page-with-toc), the grid already allocates the
  * article column via 1fr, so we remove the hard cap and let the grid do the
- * work; the article stays readable because the grid column is naturally ~40-48rem
- * once the 14rem ToC column and 2rem gap are subtracted from the 80rem container. */
-.main { min-width: 0; padding: 2.5rem 0; max-width: 48rem; overflow-wrap: break-word; }
+ * work; the article stays readable because the grid column is naturally ~58-66rem
+ * once the 14rem ToC column and 2rem gap are subtracted from the 100rem container. */
+.main { min-width: 0; padding: 2.5rem 0; max-width: 66rem; overflow-wrap: break-word; }
 .page-with-toc .main { max-width: none; }
 
 .main h1, .main h2, .main h3, .main h4, .main h5, .main h6 {
@@ -990,7 +990,7 @@ body.nav-open { overflow: hidden; }
   color: var(--muted-foreground);
 }
 .site-footer__inner {
-  max-width: 80rem;
+  max-width: 100rem;
   margin: 0 auto;
   padding: 1.25rem 1.5rem;
   display: flex;
