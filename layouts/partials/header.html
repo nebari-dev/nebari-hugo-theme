@@ -7,7 +7,7 @@
         <line x1="3" y1="18" x2="21" y2="18"></line>
       </svg>
     </button>
-    <a class="site-header__brand" href="{{ site.Home.RelPermalink }}">
+    <a class="site-header__brand" href="{{ site.Params.logoLink | default site.Home.RelPermalink }}">
       <img class="site-logo--light" src="{{ strings.TrimPrefix "/" (site.Params.logo | default "logo/logo.svg") | relURL }}" alt="Nebari">
       <img class="site-logo--dark" src="{{ strings.TrimPrefix "/" (site.Params.logoDark | default "logo/logo-dark.svg") | relURL }}" alt="Nebari">
       {{ with site.Title }}
