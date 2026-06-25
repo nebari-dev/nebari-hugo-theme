@@ -111,6 +111,11 @@ theme        = ["github.com/nebari-dev/nebari-hugo-theme"]
   # single page.  Set to the GitHub edit URL prefix up to (but not including)
   # the content-root path.  Example:
   editBase    = "https://github.com/nebari-dev/<your-pack>/edit/main/docs/content"
+  # Optional: URL the header logo/brand links to. Defaults to the site's own
+  # home page when unset. Set to a portal root (e.g. "https://packs.nebari.dev/")
+  # so the logo takes users back to the top-level docs portal instead of the
+  # pack's own home.
+  # logoLink  = "https://packs.nebari.dev/"
 
 # Top-nav tabs. Active tab is determined by RelPermalink-prefix match.
 [[params.tabs]]

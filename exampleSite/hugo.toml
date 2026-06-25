@@ -48,6 +48,11 @@ defaultContentLanguageInSubdir = false
   repo        = "https://github.com/nebari-dev/nebari-hugo-theme"
   editBase    = "https://github.com/nebari-dev/nebari-hugo-theme/edit/main/exampleSite/content"
 
+  # Optional: point the header logo somewhere other than this site's home
+  # (e.g. a docs portal root). Defaults to the site's own home when unset.
+  # Left commented so the demo site's logo stays self-contained; uncomment to try it.
+  # logoLink = "https://example.org/"
+
   # Versioning: rendered as a dropdown next to the search box. The
   # `current = true` entry is shown on the trigger.
   #
